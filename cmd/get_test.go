@@ -10,9 +10,9 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	. "github.com/cloudfoundry/bosh-utils/davcli/cmd"
-	testcmd "github.com/cloudfoundry/bosh-utils/davcli/cmd/testing"
-	davconf "github.com/cloudfoundry/bosh-utils/davcli/config"
+	. "github.com/cloudfoundry/bosh-davcli/cmd"
+	testcmd "github.com/cloudfoundry/bosh-davcli/cmd/testing"
+	davconf "github.com/cloudfoundry/bosh-davcli/config"
 )
 
 func runGet(config davconf.Config, args []string) error {

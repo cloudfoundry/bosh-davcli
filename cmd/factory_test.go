@@ -6,8 +6,8 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	. "github.com/cloudfoundry/bosh-utils/davcli/cmd"
-	davconf "github.com/cloudfoundry/bosh-utils/davcli/config"
+	. "github.com/cloudfoundry/bosh-davcli/cmd"
+	davconf "github.com/cloudfoundry/bosh-davcli/config"
 )
 
 func buildFactory() (factory Factory) {

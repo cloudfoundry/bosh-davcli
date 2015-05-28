@@ -4,7 +4,7 @@ import (
 	"errors"
 	"os"
 
-	davclient "github.com/cloudfoundry/bosh-utils/davcli/client"
+	davclient "github.com/cloudfoundry/bosh-davcli/client"
 )
 
 type PutCmd struct {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	davclient "github.com/cloudfoundry/bosh-utils/davcli/client"
-	davconf "github.com/cloudfoundry/bosh-utils/davcli/config"
+	davclient "github.com/cloudfoundry/bosh-davcli/client"
+	davconf "github.com/cloudfoundry/bosh-davcli/config"
 )
 
 type Factory interface {

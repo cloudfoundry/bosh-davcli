@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"errors"
-	davconf "github.com/cloudfoundry/bosh-utils/davcli/config"
+	davconf "github.com/cloudfoundry/bosh-davcli/config"
 )
 
 type Runner interface {

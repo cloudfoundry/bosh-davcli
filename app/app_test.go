@@ -8,8 +8,8 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
-	. "github.com/cloudfoundry/bosh-utils/davcli/app"
-	davconf "github.com/cloudfoundry/bosh-utils/davcli/config"
+	. "github.com/cloudfoundry/bosh-davcli/app"
+	davconf "github.com/cloudfoundry/bosh-davcli/config"
 )
 
 type FakeRunner struct {

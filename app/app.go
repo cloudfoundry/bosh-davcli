@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"flag"
-	davcmd "github.com/cloudfoundry/bosh-utils/davcli/cmd"
-	davconfig "github.com/cloudfoundry/bosh-utils/davcli/config"
+	davcmd "github.com/cloudfoundry/bosh-davcli/cmd"
+	davconfig "github.com/cloudfoundry/bosh-davcli/config"
 	"io/ioutil"
 	"os"
 )
