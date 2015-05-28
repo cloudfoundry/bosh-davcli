@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/cloudfoundry/bosh-utils/davcli/app"
-	"github.com/cloudfoundry/bosh-utils/davcli/cmd"
+	"github.com/cloudfoundry/bosh-davcli/app"
+	"github.com/cloudfoundry/bosh-davcli/cmd"
 )
 
 func main() {
