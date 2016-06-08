@@ -65,11 +65,13 @@ func (suite *Suite) Run(t ginkgoTestingT, description string, reporters []report
 
 func (suite *Suite) generateSpecs(description string, config config.GinkgoConfigType) *spec.Specs {
 	specsSlice := []*spec.Spec{}
+	suite.topLevelContainer.BackPropagateProgrammaticFocus()
 	for _, collatedNodes := range suite.topLevelContainer.Collate() {
-		specsSlice = append(specsSlice, spec.New(collatedNodes.Subject, collatedNodes.Containers))
+		specsSlice = append(specsSlice, spec.New(collatedNodes.Subject, collatedNodes.Containers, config.EmitSpecProgress))
 	}
 
 	specs := spec.NewSpecs(specsSlice)
+	specs.RegexScansFilePath = config.RegexScansFilePath
 
 	if config.RandomizeAllSpecs {
 		specs.Shuffle(rand.New(rand.NewSource(config.RandomSeed)))
@@ -84,7 +86,6 @@ func (suite *Suite) generateSpecs(description string, config config.GinkgoConfig
 	if config.ParallelTotal > 1 {
 		specs.TrimForParallelization(config.ParallelTotal, config.ParallelNode)
 	}
-
 	return specs
 }
 
@@ -136,35 +137,35 @@ func (suite *Suite) PushContainerNode(text string, body func(), flag types.FlagT
 
 func (suite *Suite) PushItNode(text string, body interface{}, flag types.FlagType, codeLocation types.CodeLocation, timeout time.Duration) {
 	if suite.running {
-		suite.failer.Fail("You may only call It from within another It/Measure/BeforeEach/JustBeforeEach/AfterEach", codeLocation)
+		suite.failer.Fail("You may only call It from within a Describe or Context", codeLocation)
 	}
 	suite.currentContainer.PushSubjectNode(leafnodes.NewItNode(text, body, flag, codeLocation, timeout, suite.failer, suite.containerIndex))
 }
 
 func (suite *Suite) PushMeasureNode(text string, body interface{}, flag types.FlagType, codeLocation types.CodeLocation, samples int) {
 	if suite.running {
-		suite.failer.Fail("You may only call Measure from within another It/Measure/BeforeEach/JustBeforeEach/AfterEach", codeLocation)
+		suite.failer.Fail("You may only call Measure from within a Describe or Context", codeLocation)
 	}
 	suite.currentContainer.PushSubjectNode(leafnodes.NewMeasureNode(text, body, flag, codeLocation, samples, suite.failer, suite.containerIndex))
 }
 
 func (suite *Suite) PushBeforeEachNode(body interface{}, codeLocation types.CodeLocation, timeout time.Duration) {
 	if suite.running {
-		suite.failer.Fail("You may only call BeforeEach from within another It/Measure/BeforeEach/JustBeforeEach/AfterEach", codeLocation)
+		suite.failer.Fail("You may only call BeforeEach from within a Describe or Context", codeLocation)
 	}
 	suite.currentContainer.PushSetupNode(leafnodes.NewBeforeEachNode(body, codeLocation, timeout, suite.failer, suite.containerIndex))
 }
 
 func (suite *Suite) PushJustBeforeEachNode(body interface{}, codeLocation types.CodeLocation, timeout time.Duration) {
 	if suite.running {
-		suite.failer.Fail("You may only call JustBeforeEach from within another It/Measure/BeforeEach/JustBeforeEach/AfterEach", codeLocation)
+		suite.failer.Fail("You may only call JustBeforeEach from within a Describe or Context", codeLocation)
 	}
 	suite.currentContainer.PushSetupNode(leafnodes.NewJustBeforeEachNode(body, codeLocation, timeout, suite.failer, suite.containerIndex))
 }
 
 func (suite *Suite) PushAfterEachNode(body interface{}, codeLocation types.CodeLocation, timeout time.Duration) {
 	if suite.running {
-		suite.failer.Fail("You may only call AfterEach from within another It/Measure/BeforeEach/JustBeforeEach/AfterEach", codeLocation)
+		suite.failer.Fail("You may only call AfterEach from within a Describe or Context", codeLocation)
 	}
 	suite.currentContainer.PushSetupNode(leafnodes.NewAfterEachNode(body, codeLocation, timeout, suite.failer, suite.containerIndex))
 }
