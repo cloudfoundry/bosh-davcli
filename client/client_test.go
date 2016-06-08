@@ -117,4 +117,21 @@ var _ = Describe("Client", func() {
 			})
 		})
 	})
+
+	Describe("retryable count is configurable", func() {
+		BeforeEach(func() {
+			fakeHTTPClient.Error = errors.New("EOF")
+			config = davconf.Config{RetryAttempts: 7}
+			client = NewClient(config, fakeHTTPClient)
+		})
+
+		It("tries the specified number of times", func() {
+			body := ioutil.NopCloser(strings.NewReader("content"))
+			err := client.Put("/", body, int64(7))
+			Expect(err).To(HaveOccurred())
+			Expect(err.Error()).To(ContainSubstring("Putting dav blob /: EOF"))
+			Expect(len(fakeHTTPClient.Requests)).To(Equal(7))
+		})
+
+	})
 })
