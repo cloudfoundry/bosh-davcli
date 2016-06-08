@@ -60,7 +60,8 @@ var _ = Describe("Client", func() {
 				responseBody, err := client.Get("/")
 				Expect(responseBody).To(BeNil())
 				Expect(err).To(HaveOccurred())
-				Expect(err.Error()).To(ContainSubstring("Getting dav blob /: Wrong response code: 300; body: response"))
+				Expect(err.Error()).To(ContainSubstring("Getting dav blob /: Request failed, response: Response{ StatusCode: 300, Status: '' }"))
+				Expect(len(fakeHTTPClient.Requests)).To(Equal(3))
 			})
 		})
 	})
@@ -90,14 +91,15 @@ var _ = Describe("Client", func() {
 
 		Context("when the http request fails", func() {
 			BeforeEach(func() {
-				fakeHTTPClient.Error = errors.New("")
+				fakeHTTPClient.Error = errors.New("EOF")
 			})
 
 			It("returns err", func() {
 				body := ioutil.NopCloser(strings.NewReader("content"))
 				err := client.Put("/", body, int64(7))
 				Expect(err).To(HaveOccurred())
-				Expect(err.Error()).To(ContainSubstring("Putting dav blob /"))
+				Expect(err.Error()).To(ContainSubstring("Putting dav blob /: EOF"))
+				Expect(len(fakeHTTPClient.Requests)).To(Equal(3))
 			})
 		})
 
@@ -111,7 +113,7 @@ var _ = Describe("Client", func() {
 				body := ioutil.NopCloser(strings.NewReader("content"))
 				err := client.Put("/", body, int64(7))
 				Expect(err).To(HaveOccurred())
-				Expect(err.Error()).To(ContainSubstring("Putting dav blob /: Wrong response code: 300; body: response"))
+				Expect(err.Error()).To(ContainSubstring("Putting dav blob /: Request failed, response: Response{ StatusCode: 300, Status: '' }"))
 			})
 		})
 	})

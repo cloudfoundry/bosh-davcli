@@ -8,10 +8,20 @@ import (
 	"net/url"
 	"path"
 	"strings"
+	"time"
 
 	davconf "github.com/cloudfoundry/bosh-davcli/config"
 	bosherr "github.com/cloudfoundry/bosh-utils/errors"
 	boshhttp "github.com/cloudfoundry/bosh-utils/http"
+	boshlog "github.com/cloudfoundry/bosh-utils/logger"
+)
+
+const (
+	// @todo discuss are these sane values?
+	retryAttempts = uint(3)
+	// @todo hard-coding this significantly slows down the tests
+	//       should this be using the mockable time service somehow?
+	retryDelay    = 1 * time.Second
 )
 
 type Client interface {
@@ -20,9 +30,19 @@ type Client interface {
 }
 
 func NewClient(config davconf.Config, httpClient boshhttp.Client) (c Client) {
+	// @todo i assume this behavior should be for both gets and puts
+	//       and i assume we shouldn't expect the caller to provide a RetryClient
+	// @todo should a logger now be passed in to this client?
+	retryClient := boshhttp.NewRetryClient(
+		httpClient,
+		retryAttempts,
+		retryDelay,
+		boshlog.NewLogger(boshlog.LevelNone),
+	)
+
 	return client{
 		config:     config,
-		httpClient: httpClient,
+		httpClient: retryClient,
 	}
 }
 
