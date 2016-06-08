@@ -11,6 +11,7 @@ import (
 	. "github.com/cloudfoundry/bosh-davcli/client"
 	davconf "github.com/cloudfoundry/bosh-davcli/config"
 	fakehttp "github.com/cloudfoundry/bosh-utils/http/fakes"
+	boshlog "github.com/cloudfoundry/bosh-utils/logger"
 )
 
 var _ = Describe("Client", func() {
@@ -18,11 +19,13 @@ var _ = Describe("Client", func() {
 		fakeHTTPClient *fakehttp.FakeClient
 		config         davconf.Config
 		client         Client
+		logger         boshlog.Logger
 	)
 
 	BeforeEach(func() {
 		fakeHTTPClient = fakehttp.NewFakeClient()
-		client = NewClient(config, fakeHTTPClient)
+		logger = boshlog.NewLogger(boshlog.LevelNone)
+		client = NewClient(config, fakeHTTPClient, logger)
 	})
 
 	Describe("Get", func() {
@@ -122,7 +125,7 @@ var _ = Describe("Client", func() {
 		BeforeEach(func() {
 			fakeHTTPClient.Error = errors.New("EOF")
 			config = davconf.Config{RetryAttempts: 7}
-			client = NewClient(config, fakeHTTPClient)
+			client = NewClient(config, fakeHTTPClient, logger)
 		})
 
 		It("tries the specified number of times", func() {

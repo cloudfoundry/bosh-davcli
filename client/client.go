@@ -21,7 +21,7 @@ type Client interface {
 	Put(path string, content io.ReadCloser, contentLength int64) (err error)
 }
 
-func NewClient(config davconf.Config, httpClient boshhttp.Client) (c Client) {
+func NewClient(config davconf.Config, httpClient boshhttp.Client, logger boshlog.Logger) (c Client) {
 	if config.RetryAttempts == 0 {
 		config.RetryAttempts = 3
 	}
@@ -32,7 +32,7 @@ func NewClient(config davconf.Config, httpClient boshhttp.Client) (c Client) {
 		httpClient,
 		config.RetryAttempts,
 		duration,
-		boshlog.NewLogger(boshlog.LevelNone),
+		logger,
 	)
 
 	return client{
