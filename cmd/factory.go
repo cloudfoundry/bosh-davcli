@@ -41,5 +41,6 @@ func (f *factory) SetConfig(config davconf.Config) {
 	f.cmds = map[string]Cmd{
 		"put": newPutCmd(client),
 		"get": newGetCmd(client),
+		"exists": newExistsCmd(client),
 	}
 }

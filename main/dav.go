@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/cloudfoundry/bosh-davcli/app"
 	"github.com/cloudfoundry/bosh-davcli/cmd"
@@ -19,6 +20,10 @@ func main() {
 
 	err := cli.Run(os.Args)
 	if err != nil {
+		if strings.Contains(err.Error(), "not found") {
+		  fmt.Printf("Blob not found - %s", err.Error())
+		  os.Exit(3)
+		}
 		fmt.Printf("Error running app - %s", err.Error())
 		os.Exit(1)
 	}

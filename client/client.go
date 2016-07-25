@@ -19,6 +19,7 @@ import (
 type Client interface {
 	Get(path string) (content io.ReadCloser, err error)
 	Put(path string, content io.ReadCloser, contentLength int64) (err error)
+	Exists(path string) (err error)
 }
 
 func NewClient(config davconf.Config, httpClient boshhttp.Client, logger boshlog.Logger) (c Client) {
@@ -88,6 +89,25 @@ func (c client) Put(path string, content io.ReadCloser, contentLength int64) (er
 
 	return
 }
+
+func (c client) Exists(path string) (err error) {
+	req, err := c.createReq("HEAD", path, nil)
+	if err != nil {
+		return
+	}
+
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		if resp != nil && resp.StatusCode == 404 {
+		  err = fmt.Errorf("%s not found", path)
+		}
+		err = bosherr.WrapErrorf(err, "Checking if dav blob %s exists", path)
+		return
+	}
+
+	return
+}
+
 
 func (c client) createReq(method, blobID string, body io.Reader) (req *http.Request, err error) {
 	blobURL, err := url.Parse(c.config.Endpoint)

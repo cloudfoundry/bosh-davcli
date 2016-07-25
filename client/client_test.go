@@ -28,6 +28,41 @@ var _ = Describe("Client", func() {
 		client = NewClient(config, fakeHTTPClient, logger)
 	})
 
+	Describe("Exists", func() {
+		BeforeEach(func() {
+			fakeHTTPClient.StatusCode = 200
+		})
+
+		It("does not return an error if file exists", func() {
+			err := client.Exists("/somefile")
+			Expect(err).NotTo(HaveOccurred())
+		})
+
+		Context("the file does not exist", func() {
+			BeforeEach(func() {
+				fakeHTTPClient.StatusCode = 404
+			})
+
+			It("returns an error saying blob was not found", func() {
+				err := client.Exists("/somefile")
+				Expect(err).To(HaveOccurred())
+				Expect(err.Error()).To(ContainSubstring("Checking if dav blob /somefile exists: /somefile not found"))
+			})
+		})
+
+		Context("unexpected http status code returned", func() {
+			BeforeEach(func() {
+				fakeHTTPClient.StatusCode = 601
+			})
+
+			It("returns an error saying an unexpected error occurred", func() {
+				err := client.Exists("/somefile")
+				Expect(err).To(HaveOccurred())
+				Expect(err.Error()).To(ContainSubstring("Checking if dav blob /somefile exists:"))
+			})
+		})
+	})
+
 	Describe("Get", func() {
 		It("returns the response body from the given path", func() {
 			fakeHTTPClient.StatusCode = 200
