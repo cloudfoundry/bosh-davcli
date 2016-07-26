@@ -23,11 +23,6 @@ pushd ${release_dir} > /dev/null
     go vet $f
   done
 
-  echo -e "\n Checking with golint..."
-  for f in $DAVCLI_FILES ; do
-    golint $f
-  done
-
   echo -e "\n Unit testing packages..."
   ginkgo -r -race ./
 
