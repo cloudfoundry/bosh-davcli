@@ -25,7 +25,7 @@ pushd ${release_dir} > /dev/null
   echo -e "\n building artifact..."
   go build -ldflags "-X main.version=${version}" \
     -o "out/davcli-${semver}-linux-amd64"         \
-    github.com/cloudfoundry/bosh-davcli
+    github.com/cloudfoundry/bosh-davcli/main
 
   echo -e "\n sha1 of artifact..."
   sha1sum out/davcli-${semver}-linux-amd64

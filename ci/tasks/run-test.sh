@@ -30,9 +30,5 @@ pushd ${release_dir} > /dev/null
   go get gopkg.in/yaml.v2
   ginkgo -r -race ./
 
-  echo -e "\n Running build script to confirm everything compiles..."
-  go build -ldflags "-X main.version=${version}" -o out/davcli \
-    github.com/cloudfoundry/bosh-davcli/main
-
   echo -e "\n suite success"
 popd > /dev/null
