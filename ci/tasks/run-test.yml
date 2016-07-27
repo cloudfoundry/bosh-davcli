@@ -7,4 +7,4 @@ inputs:
 - name: davcli-src
   path: src/github.com/cloudfoundry/bosh-davcli
 run:
-  path: src/github.com/cloudfoundry/bosh-davcli/ci/tasks/run-unit.sh
+  path: src/github.com/cloudfoundry/bosh-davcli/ci/tasks/run-test.sh

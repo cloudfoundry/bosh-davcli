@@ -23,16 +23,16 @@ pushd ${release_dir} > /dev/null
     go vet $f
   done
 
+  echo -e "\n Installing ginkgo..."
+  go install ./vendor/github.com/onsi/ginkgo/ginkgo
+
   echo -e "\n Unit testing packages..."
+  go get gopkg.in/yaml.v2
   ginkgo -r -race ./
 
   echo -e "\n Running build script to confirm everything compiles..."
   go build -ldflags "-X main.version=${version}" -o out/davcli \
-    github.com/cloudfoundry/bosh-davcli
-
-  echo -e "\n Testing version information"
-  app_version=$(out/davcli -v)
-  test "${app_version}" = "version ${version}"
+    github.com/cloudfoundry/bosh-davcli/main
 
   echo -e "\n suite success"
 popd > /dev/null
