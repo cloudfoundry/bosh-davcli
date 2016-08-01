@@ -8,6 +8,7 @@ import (
 	davconfig "github.com/cloudfoundry/bosh-davcli/config"
 	"io/ioutil"
 	"os"
+	"fmt"
 )
 
 type App struct {
@@ -22,11 +23,19 @@ func New(runner davcmd.Runner) (app App) {
 func (app App) Run(args []string) (err error) {
 	args = args[1:]
 	var configFilePath string
+	var printVersion bool
 
 	flagSet := flag.NewFlagSet("davcli-args", flag.ContinueOnError)
 	flagSet.StringVar(&configFilePath, "c", "", "Config file path")
+	flagSet.BoolVar(&printVersion, "v", false, "print version info")
+
 	err = flagSet.Parse(args)
 	if err != nil {
+		return
+	}
+
+	if printVersion {
+		fmt.Println("davcli version 0.0.1")
 		return
 	}
 

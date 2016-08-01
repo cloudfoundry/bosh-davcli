@@ -66,6 +66,12 @@ func init() {
 			Expect(err).To(HaveOccurred())
 			Expect(err.Error()).To(ContainSubstring("Config file arg `-c` is missing"))
 		})
+		It("prints the version info with the -v flag", func() {
+			runner := &FakeRunner{}
+			app := New(runner)
+			err := app.Run([]string{"dav-cli", "-v"})
+			Expect(err).ToNot(HaveOccurred())
+		})
 
 		It("returns error from the cmd runner", func() {
 			runner := &FakeRunner{
