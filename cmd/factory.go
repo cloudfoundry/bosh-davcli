@@ -39,8 +39,8 @@ func (f *factory) SetConfig(config davconf.Config) {
 	client := davclient.NewClient(config, http.DefaultClient, f.logger)
 
 	f.cmds = map[string]Cmd{
-		"put": newPutCmd(client),
-		"get": newGetCmd(client),
+		"put":    newPutCmd(client),
+		"get":    newGetCmd(client),
 		"exists": newExistsCmd(client),
 	}
 }

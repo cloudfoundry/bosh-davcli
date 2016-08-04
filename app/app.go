@@ -4,11 +4,11 @@ import (
 	"encoding/json"
 	"errors"
 	"flag"
+	"fmt"
 	davcmd "github.com/cloudfoundry/bosh-davcli/cmd"
 	davconfig "github.com/cloudfoundry/bosh-davcli/config"
 	"io/ioutil"
 	"os"
-	"fmt"
 )
 
 type App struct {

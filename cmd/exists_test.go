@@ -24,12 +24,12 @@ func runExists(config davconf.Config, args []string) error {
 	return cmd.Run(args)
 }
 
-var _ =	Describe("Exists", func() {
+var _ = Describe("Exists", func() {
 	var (
-		handler func(http.ResponseWriter, *http.Request)
+		handler       func(http.ResponseWriter, *http.Request)
 		requestedBlob string
-		ts *httptest.Server
-		config davconf.Config
+		ts            *httptest.Server
+		config        davconf.Config
 	)
 
 	BeforeEach(func() {
@@ -45,7 +45,7 @@ var _ =	Describe("Exists", func() {
 			Expect(username).To(Equal("some user"))
 			Expect(password).To(Equal("some pwd"))
 
-		  w.WriteHeader(200)
+			w.WriteHeader(200)
 		}
 
 		ts = httptest.NewServer(http.HandlerFunc(handler))
