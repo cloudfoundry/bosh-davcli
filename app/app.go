@@ -35,7 +35,7 @@ func (app App) Run(args []string) (err error) {
 	}
 
 	if printVersion {
-		fmt.Println("davcli version 0.0.1")
+		fmt.Println("davcli version [[version]]")
 		return
 	}
 
