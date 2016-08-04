@@ -42,5 +42,6 @@ func (f *factory) SetConfig(config davconf.Config) {
 		"put":    newPutCmd(client),
 		"get":    newGetCmd(client),
 		"exists": newExistsCmd(client),
+		"delete": newDeleteCmd(client),
 	}
 }

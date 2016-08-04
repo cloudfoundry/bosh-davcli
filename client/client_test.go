@@ -23,6 +23,9 @@ var _ = Describe("Client", func() {
 	)
 
 	BeforeEach(func() {
+		config.Endpoint = "http://example.com/"
+		config.User = "some_user"
+		config.Password = "some password"
 		fakeHTTPClient = fakehttp.NewFakeClient()
 		logger = boshlog.NewLogger(boshlog.LevelNone)
 		client = NewClient(config, fakeHTTPClient, logger)
@@ -59,6 +62,48 @@ var _ = Describe("Client", func() {
 				err := client.Exists("/somefile")
 				Expect(err).To(HaveOccurred())
 				Expect(err.Error()).To(ContainSubstring("Checking if dav blob /somefile exists:"))
+			})
+		})
+	})
+
+	Describe("Delete", func() {
+		Context("when the file does not exist", func() {
+			BeforeEach(func() {
+				fakeHTTPClient.StatusCode = 404
+			})
+
+			It("does not return an error if file does not exists", func() {
+				fakeHTTPClient.StatusCode = 404
+
+				err := client.Delete("/somefile")
+				Expect(err).NotTo(HaveOccurred())
+			})
+		})
+
+		Context("when the file exists", func() {
+			BeforeEach(func() {
+				fakeHTTPClient.StatusCode = 204
+			})
+
+			It("does not return an error", func() {
+				err := client.Delete("/somefile")
+				Expect(err).ToNot(HaveOccurred())
+				Expect(fakeHTTPClient.Requests[0].URL.Path).To(Equal("/19/somefile"))
+				Expect(fakeHTTPClient.Requests[0].Method).To(Equal("DELETE"))
+				Expect(fakeHTTPClient.Requests[0].Header["Authorization"]).To(Equal([]string{"Basic c29tZV91c2VyOnNvbWUgcGFzc3dvcmQ="}))
+				Expect(fakeHTTPClient.Requests[0].Host).To(Equal("example.com"))
+			})
+		})
+
+		Context("unexpected http status code returned", func() {
+			BeforeEach(func() {
+				fakeHTTPClient.StatusCode = 601
+			})
+
+			It("returns an error saying an unexpected error occurred", func() {
+				err := client.Delete("/somefile")
+				Expect(err).To(HaveOccurred())
+				Expect(err.Error()).To(Equal("Deleting blob '/somefile': Request failed, response: Response{ StatusCode: 601, Status: '' }"))
 			})
 		})
 	})

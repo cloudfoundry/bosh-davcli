@@ -20,6 +20,7 @@ type Client interface {
 	Get(path string) (content io.ReadCloser, err error)
 	Put(path string, content io.ReadCloser, contentLength int64) (err error)
 	Exists(path string) (err error)
+	Delete(path string) (err error)
 }
 
 func NewClient(config davconf.Config, httpClient boshhttp.Client, logger boshlog.Logger) (c Client) {
@@ -103,6 +104,24 @@ func (c client) Exists(path string) (err error) {
 		}
 		err = bosherr.WrapErrorf(err, "Checking if dav blob %s exists", path)
 		return
+	}
+
+	return
+}
+
+func (c client) Delete(path string) (err error) {
+	req, err := c.createReq("DELETE", path, nil)
+	if err != nil {
+		err = bosherr.WrapErrorf(err, "Creating delete request for blob '%s'", path)
+	}
+
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		if resp != nil && resp.StatusCode == 404 {
+			err = nil
+		} else {
+			err = bosherr.WrapErrorf(err, "Deleting blob '%s'", path)
+		}
 	}
 
 	return

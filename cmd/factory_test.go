@@ -28,16 +28,24 @@ func init() {
 			Expect(err).ToNot(HaveOccurred())
 			Expect(reflect.TypeOf(cmd)).To(Equal(reflect.TypeOf(PutCmd{})))
 		})
-		It("factory create a get command", func() {
 
+		It("factory create a get command", func() {
 			factory := buildFactory()
 			cmd, err := factory.Create("get")
 
 			Expect(err).ToNot(HaveOccurred())
 			Expect(reflect.TypeOf(cmd)).To(Equal(reflect.TypeOf(GetCmd{})))
 		})
-		It("factory create when cmd is unknown", func() {
 
+		It("factory create a delete command", func() {
+			factory := buildFactory()
+			cmd, err := factory.Create("delete")
+
+			Expect(err).ToNot(HaveOccurred())
+			Expect(reflect.TypeOf(cmd)).To(Equal(reflect.TypeOf(DeleteCmd{})))
+		})
+
+		It("factory create when cmd is unknown", func() {
 			factory := buildFactory()
 			_, err := factory.Create("some unknown cmd")
 
