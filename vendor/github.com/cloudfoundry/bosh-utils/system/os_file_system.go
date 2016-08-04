@@ -13,6 +13,8 @@ import (
 
 	"errors"
 
+	"github.com/bmatcuk/doublestar"
+	fsWrapper "github.com/charlievieth/fs"
 	bosherr "github.com/cloudfoundry/bosh-utils/errors"
 	boshlog "github.com/cloudfoundry/bosh-utils/logger"
 )
@@ -63,11 +65,12 @@ func (fs *osFileSystem) ExpandPath(path string) (string, error) {
 	if err != nil {
 		return "", bosherr.WrapError(err, "Getting absolute path")
 	}
+
 	return path, nil
 }
 
 func (fs *osFileSystem) MkdirAll(path string, perm os.FileMode) (err error) {
-	fs.logger.Debug(fs.logTag, "Making dir %s with perm %d", path, perm)
+	fs.logger.Debug(fs.logTag, "Making dir %s with perm %#o", path, perm)
 	return os.MkdirAll(path, perm)
 }
 
@@ -109,6 +112,11 @@ func (fs *osFileSystem) Chmod(path string, perm os.FileMode) (err error) {
 
 func (fs *osFileSystem) OpenFile(path string, flag int, perm os.FileMode) (File, error) {
 	return os.OpenFile(path, flag, perm)
+}
+
+func (fs *osFileSystem) Stat(path string) (os.FileInfo, error) {
+	fs.logger.Debug(fs.logTag, "Stat '%s'", path)
+	return fsWrapper.Stat(path)
 }
 
 func (fs *osFileSystem) WriteFileString(path, content string) (err error) {
@@ -236,6 +244,7 @@ func (fs *osFileSystem) Symlink(oldPath, newPath string) error {
 			return bosherr.WrapErrorf(err, "Removing new path at %s", newPath)
 		}
 	}
+
 	containingDir := filepath.Dir(newPath)
 	if !fs.FileExists(containingDir) {
 		fs.MkdirAll(containingDir, os.FileMode(0700))
@@ -251,6 +260,7 @@ func (fs *osFileSystem) ReadLink(symlinkPath string) (targetPath string, err err
 
 func (fs *osFileSystem) CopyFile(srcPath, dstPath string) error {
 	fs.logger.Debug(fs.logTag, "Copying file '%s' to '%s'", srcPath, dstPath)
+
 	srcFile, err := os.Open(srcPath)
 	if err != nil {
 		return bosherr.WrapError(err, "Opening source path")
@@ -354,13 +364,18 @@ func (f *osFileSystem) ChangeTempRoot(tempRootPath string) error {
 
 func (fs *osFileSystem) RemoveAll(fileOrDir string) (err error) {
 	fs.logger.Debug(fs.logTag, "Remove all %s", fileOrDir)
-	err = os.RemoveAll(fileOrDir)
+	err = fsWrapper.RemoveAll(fileOrDir)
 	return
 }
 
 func (fs *osFileSystem) Glob(pattern string) (matches []string, err error) {
 	fs.logger.Debug(fs.logTag, "Glob '%s'", pattern)
 	return filepath.Glob(pattern)
+}
+
+func (fs *osFileSystem) RecursiveGlob(pattern string) (matches []string, err error) {
+	fs.logger.Debug(fs.logTag, "RecursiveGlob '%s'", pattern)
+	return doublestar.Glob(pattern)
 }
 
 func (fs *osFileSystem) Walk(root string, walkFunc filepath.WalkFunc) error {
