@@ -21,7 +21,7 @@ func (cmd PutCmd) Run(args []string) error {
 		return errors.New("Incorrect usage, put needs local file and remote blob destination")
 	}
 
-	file, err := os.Open(args[0])
+	file, err := os.OpenFile(args[0], os.O_RDWR, os.ModeExclusive)
 	if err != nil {
 		return err
 	}
