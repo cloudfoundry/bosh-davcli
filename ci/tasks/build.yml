@@ -12,4 +12,4 @@ outputs:
 run:
   path: src/github.com/cloudfoundry/bosh-davcli/ci/tasks/build.sh
 params:
-  GOOS: REPLACE_ME
+  GOOS: linux

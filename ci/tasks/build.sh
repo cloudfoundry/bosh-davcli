@@ -8,7 +8,6 @@ workspace_dir="$( cd ${release_dir} && cd ../../../.. && pwd )"
 
 export GOPATH=${workspace_dir}
 export PATH=${GOPATH}/bin:${PATH}
-export GOOS=${GOOS:-linux}
 
 # inputs
 semver_dir="${workspace_dir}/version-semver"

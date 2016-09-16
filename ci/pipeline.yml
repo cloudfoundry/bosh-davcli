@@ -20,28 +20,29 @@ jobs:
         - get: davcli-src
           resource: davcli-in
           trigger: true
-          passed: [
-            test,
-          ]
-        - {trigger: false, get: version-semver, params: {bump: patch} }
+          passed:
+            - test
 
-      - {put: version-semver, params: {file: version-semver/number}}
+        - put: version-semver
+          params:
+            bump: patch
 
-      - task: build-linux
-        file: davcli-src/ci/tasks/build.yml
-        params:
-          GOOS: linux
+      - aggregate:
+        - do:
+          - task: build-linux
+            file: davcli-src/ci/tasks/build.yml
+            params:
+              GOOS: linux
+          - put: release-bucket-linux
+            params: {file: out/davcli-*-linux-amd64}
 
-      - put: release-bucket-linux
-        params: {file: out/davcli-*-linux-amd64}
-
-      - task: build-windows
-        file: davcli-src/ci/tasks/build.yml
-        params:
-          GOOS: windows
-
-      - put: release-bucket-windows
-        params: {file: out/davcli-*-windows-amd64}
+        - do:
+          - task: build-windows
+            file: davcli-src/ci/tasks/build.yml
+            params:
+              GOOS: windows
+          - put: release-bucket-windows
+            params: {file: out/davcli-*-windows-amd64}
 
 resources:
   - name: davcli-in
