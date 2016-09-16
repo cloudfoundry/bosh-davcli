@@ -29,9 +29,19 @@ jobs:
 
       - task: build-linux
         file: davcli-src/ci/tasks/build.yml
+        params:
+          GOOS: linux
 
       - put: release-bucket-linux
         params: {file: out/davcli-*-linux-amd64}
+
+      - task: build-windows
+        file: davcli-src/ci/tasks/build.yml
+        params:
+          GOOS: windows
+
+      - put: release-bucket-windows
+        params: {file: out/davcli-*-windows-amd64}
 
 resources:
   - name: davcli-in
@@ -53,6 +63,14 @@ resources:
     type: s3
     source:
       regexp: davcli-(.*)-linux-amd64
+      bucket: {{davcli_release_bucket}}
+      access_key_id: {{davcli_release_bucket_access_key}}
+      secret_access_key: {{davcli_release_bucket_secret_key}}
+
+  - name: release-bucket-windows
+    type: s3
+    source:
+      regexp: davcli-(.*)-windows-amd64
       bucket: {{davcli_release_bucket}}
       access_key_id: {{davcli_release_bucket_access_key}}
       secret_access_key: {{davcli_release_bucket_secret_key}}

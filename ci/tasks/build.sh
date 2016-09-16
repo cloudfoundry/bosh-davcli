@@ -8,6 +8,7 @@ workspace_dir="$( cd ${release_dir} && cd ../../../.. && pwd )"
 
 export GOPATH=${workspace_dir}
 export PATH=${GOPATH}/bin:${PATH}
+export GOOS=${GOOS:-linux}
 
 # inputs
 semver_dir="${workspace_dir}/version-semver"
@@ -24,11 +25,11 @@ pushd ${release_dir} > /dev/null
 
   echo -e "\n building artifact..."
   go build -ldflags "-X main.version=${version}" \
-    -o "out/davcli-${semver}-linux-amd64"         \
+    -o "out/davcli-${semver}-${GOOS}-amd64"         \
     github.com/cloudfoundry/bosh-davcli/main
 
   echo -e "\n sha1 of artifact..."
-  sha1sum out/davcli-${semver}-linux-amd64
+  sha1sum out/davcli-${semver}-${GOOS}-amd64
 
-  mv out/davcli-${semver}-linux-amd64 ${output_dir}/
+  mv out/davcli-${semver}-${GOOS}-amd64 ${output_dir}/
 popd > /dev/null
