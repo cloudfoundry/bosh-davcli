@@ -22,10 +22,9 @@ jobs:
           trigger: true
           passed:
             - test
-
-        - put: version-semver
-          params:
-            bump: patch
+      - get: version-semver
+        params:
+          bump: patch
 
       - aggregate:
         - task: build-linux
@@ -44,6 +43,10 @@ jobs:
           params: {file: out-linux/davcli-*-linux-amd64}
         - put: release-bucket-windows
           params: {file: out-windows/davcli-*-windows-amd64}
+
+      - put: version-semver
+        params:
+          file: version-semver/current-version
 
 resources:
   - name: davcli-in

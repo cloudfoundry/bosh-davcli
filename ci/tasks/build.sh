@@ -29,7 +29,7 @@ pushd ${release_dir} > /dev/null
 
   echo -e "\n building artifact..."
   go build -ldflags "-X main.version=${version}" \
-    -o "out/${binname}"
+    -o "out/${binname}" \
     github.com/cloudfoundry/bosh-davcli/main
 
   echo -e "\n sha1 of artifact..."
