@@ -18,7 +18,7 @@ output_dir=${workspace_dir}/out
 semver="$(cat ${semver_dir}/number)"
 timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
-binname="davcli-${semver}-${GOOS}-amd64"
+binname="davcli-${semver}-${GOOS}-${GOARCH}"
 if [ $GOOS = "windows" ]; then
     binname="${binname}.exe"
 fi
