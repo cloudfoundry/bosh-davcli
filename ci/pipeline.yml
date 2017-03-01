@@ -32,15 +32,25 @@ jobs:
           output_mapping: { out: out-linux }
           params:
             GOOS: linux
+            GOARCH: amd64
+        - task: build-linux-ppc64le
+          file: davcli-src/ci/tasks/build.yml
+          output_mapping: { out: out-linux-ppc64le }
+          params:
+            GOOS: linux
+            GOARCH: ppc64le
         - task: build-windows
           file: davcli-src/ci/tasks/build.yml
           output_mapping: { out: out-windows }
           params:
             GOOS: windows
+            GOARCH: amd64
 
       - aggregate:
         - put: release-bucket-linux
           params: {file: out-linux/davcli-*-linux-amd64}
+        - put: release-bucket-linux-ppc64le
+          params: {file: out-linux-ppc64le/davcli-*-linux-ppc64le}
         - put: release-bucket-windows
           params: {file: out-windows/davcli-*-windows-amd64.exe}
 
@@ -68,6 +78,14 @@ resources:
     type: s3
     source:
       regexp: davcli-(.*)-linux-amd64
+      bucket: {{davcli_release_bucket}}
+      access_key_id: {{davcli_release_bucket_access_key}}
+      secret_access_key: {{davcli_release_bucket_secret_key}}
+
+  - name: release-bucket-linux-ppc64le
+    type: s3
+    source:
+      regexp: davcli-(.*)-linux-ppc64le
       bucket: {{davcli_release_bucket}}
       access_key_id: {{davcli_release_bucket_access_key}}
       secret_access_key: {{davcli_release_bucket_secret_key}}
