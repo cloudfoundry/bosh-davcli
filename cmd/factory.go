@@ -2,10 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"net/http"
 
 	davclient "github.com/cloudfoundry/bosh-davcli/client"
 	davconf "github.com/cloudfoundry/bosh-davcli/config"
+	boshhttpclient "github.com/cloudfoundry/bosh-utils/httpclient"
 	boshlog "github.com/cloudfoundry/bosh-utils/logger"
 )
 
@@ -36,7 +36,8 @@ func (f *factory) Create(name string) (cmd Cmd, err error) {
 }
 
 func (f *factory) SetConfig(config davconf.Config) {
-	client := davclient.NewClient(config, http.DefaultClient, f.logger)
+	httpClient := boshhttpclient.CreateDefaultClient(nil)
+	client := davclient.NewClient(config, httpClient, f.logger)
 
 	f.cmds = map[string]Cmd{
 		"put":    newPutCmd(client),
