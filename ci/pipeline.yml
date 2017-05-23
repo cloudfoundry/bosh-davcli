@@ -58,7 +58,7 @@ jobs:
         params:
           file: version-semver/number
       - put: davcli-src
-        params: {repository: s3cli-src, tag: version-semver/number, tag_prefix: v}
+        params: {repository: davcli-src, tag: version-semver/number, tag_prefix: v}
       - put: tracker-output
         params:
           repos:
