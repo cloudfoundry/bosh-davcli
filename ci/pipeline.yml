@@ -1,4 +1,5 @@
 ---
+# fly -t cpi set-pipeline -p davcli -c ci/pipeline.yml -l <(lpass show -G "davcli concourse secrets" --notes) -l <(lpass show --notes "pivotal-tracker-resource-keys")
 groups:
   - name: davcli
     jobs:
@@ -9,7 +10,7 @@ jobs:
   - name: test
     serial: true
     plan:
-      - {trigger: true, get: davcli-src, resource: davcli-in}
+      - {trigger: true, get: davcli-src}
 
       - task: test
         file: davcli-src/ci/tasks/run-test.yml
@@ -18,7 +19,6 @@ jobs:
     plan:
       - aggregate:
         - get: davcli-src
-          resource: davcli-in
           trigger: true
           passed:
             - test
@@ -57,17 +57,20 @@ jobs:
       - put: version-semver
         params:
           file: version-semver/number
+      - put: davcli-src
+        params: {repository: s3cli-src, tag: version-semver/number, tag_prefix: v}
       - put: tracker-output
         params:
           repos:
           - davcli-src
 
 resources:
-  - name: davcli-in
+  - name: davcli-src
     type: git
     source:
       uri: https://github.com/cloudfoundry/bosh-davcli
       branch: master
+      private_key: {{davcli_github_deploy_key}}
 
   - name: version-semver
     type: semver
