@@ -68,7 +68,7 @@ resources:
   - name: davcli-src
     type: git
     source:
-      uri: https://github.com/cloudfoundry/bosh-davcli
+      uri: git@github.com:cloudfoundry/bosh-davcli.git
       branch: master
       private_key: {{davcli_github_deploy_key}}
 
