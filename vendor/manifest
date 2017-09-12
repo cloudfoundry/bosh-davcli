@@ -13,7 +13,7 @@
 			"importpath": "github.com/cloudfoundry/bosh-utils",
 			"repository": "https://github.com/cloudfoundry/bosh-utils",
 			"vcs": "git",
-			"revision": "833257efc00aee289992e3c49551121850208c36",
+			"revision": "148a52cad58d6cb03d4f5c134bf484ea3fafd874",
 			"branch": "master",
 			"notests": true
 		},
