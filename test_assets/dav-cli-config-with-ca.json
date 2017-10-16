@@ -1,0 +1,6 @@
+{
+    "user":"some user",
+    "password":"some pwd",
+    "endpoint":"http://example.com/some/endpoint",
+    "CA":"ca-cert"
+}

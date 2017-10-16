@@ -41,6 +41,24 @@ func pathToFixture(file string) string {
 
 func init() {
 	Describe("Testing with Ginkgo", func() {
+		It("reads the CA cert from config", func() {
+			runner := &FakeRunner{}
+
+			app := New(runner)
+			err := app.Run([]string{"dav-cli", "-c", pathToFixture("dav-cli-config-with-ca.json"), "put", "localFile", "remoteFile"})
+			Expect(err).ToNot(HaveOccurred())
+
+			expectedConfig := davconf.Config{
+				User:     "some user",
+				Password: "some pwd",
+				Endpoint: "http://example.com/some/endpoint",
+				CA:       "ca-cert",
+			}
+
+			Expect(runner.Config).To(Equal(expectedConfig))
+			Expect(runner.Config.CA).ToNot(BeNil())
+		})
+
 		It("runs the put command", func() {
 			runner := &FakeRunner{}
 
@@ -55,6 +73,7 @@ func init() {
 			}
 
 			Expect(runner.Config).To(Equal(expectedConfig))
+			Expect(runner.Config.CA).To(BeEmpty())
 			Expect(runner.RunArgs).To(Equal([]string{"put", "localFile", "remoteFile"}))
 		})
 

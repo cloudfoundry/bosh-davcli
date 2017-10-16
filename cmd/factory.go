@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 
+	"crypto/x509"
 	davclient "github.com/cloudfoundry/bosh-davcli/client"
 	davconf "github.com/cloudfoundry/bosh-davcli/config"
 	boshhttpclient "github.com/cloudfoundry/bosh-utils/httpclient"
@@ -36,7 +37,16 @@ func (f *factory) Create(name string) (cmd Cmd, err error) {
 }
 
 func (f *factory) SetConfig(config davconf.Config) {
-	httpClient := boshhttpclient.CreateDefaultClient(nil)
+
+	var httpClient boshhttpclient.Client
+	if len(config.CA) != 0 {
+		caCert := x509.NewCertPool()
+		caCert.AppendCertsFromPEM([]byte(config.CA))
+		httpClient = boshhttpclient.CreateDefaultClient(caCert)
+	} else {
+		httpClient = boshhttpclient.CreateDefaultClient(nil)
+	}
+
 	client := davclient.NewClient(config, httpClient, f.logger)
 
 	f.cmds = map[string]Cmd{
