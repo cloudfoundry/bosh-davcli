@@ -40,9 +40,9 @@ func (f *factory) SetConfig(config davconf.Config) {
 	var httpClient boshhttpclient.Client
 	var caCert *x509.CertPool
 
-	if len(config.CaCert) != 0 {
+	if len(config.CACert) != 0 {
 		caCert = x509.NewCertPool()
-		caCert.AppendCertsFromPEM([]byte(config.CaCert))
+		caCert.AppendCertsFromPEM([]byte(config.CACert))
 	}
 
 	httpClient = boshhttpclient.CreateDefaultClient(caCert)

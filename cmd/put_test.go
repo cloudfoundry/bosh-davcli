@@ -119,7 +119,7 @@ var _ = Describe("PutCmd", func() {
 					User:     "some user",
 					Password: "some pwd",
 					Endpoint: ts.URL,
-					CaCert:   rootCa,
+					CACert:   rootCa,
 				}
 			})
 

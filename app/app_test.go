@@ -52,11 +52,11 @@ func init() {
 				User:     "some user",
 				Password: "some pwd",
 				Endpoint: "https://example.com/some/endpoint",
-				CaCert:   "ca-cert",
+				CACert:   "ca-cert",
 			}
 
 			Expect(runner.Config).To(Equal(expectedConfig))
-			Expect(runner.Config.CaCert).ToNot(BeNil())
+			Expect(runner.Config.CACert).ToNot(BeNil())
 		})
 
 		It("runs the put command", func() {
@@ -73,7 +73,7 @@ func init() {
 			}
 
 			Expect(runner.Config).To(Equal(expectedConfig))
-			Expect(runner.Config.CaCert).To(BeEmpty())
+			Expect(runner.Config.CACert).To(BeEmpty())
 			Expect(runner.RunArgs).To(Equal([]string{"put", "localFile", "remoteFile"}))
 		})
 

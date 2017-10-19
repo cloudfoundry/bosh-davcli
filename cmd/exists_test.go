@@ -91,7 +91,7 @@ var _ = Describe("Exists", func() {
 				User:     "some user",
 				Password: "some pwd",
 				Endpoint: ts.URL,
-				CaCert:   rootCa,
+				CACert:   rootCa,
 			}
 		})
 

@@ -92,7 +92,7 @@ var _ = Describe("DeleteCmd", func() {
 				User:     "some user",
 				Password: "some pwd",
 				Endpoint: ts.URL,
-				CaCert:   rootCa,
+				CACert:   rootCa,
 			}
 		})
 
