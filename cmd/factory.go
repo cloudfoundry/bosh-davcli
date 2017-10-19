@@ -37,15 +37,11 @@ func (f *factory) Create(name string) (cmd Cmd, err error) {
 }
 
 func (f *factory) SetConfig(config davconf.Config) {
-
 	var httpClient boshhttpclient.Client
-	if len(config.CA) != 0 {
-		caCert := x509.NewCertPool()
-		caCert.AppendCertsFromPEM([]byte(config.CA))
-		httpClient = boshhttpclient.CreateDefaultClient(caCert)
-	} else {
-		httpClient = boshhttpclient.CreateDefaultClient(nil)
-	}
+
+	caCert := loadCaCert(config)
+
+	httpClient = boshhttpclient.CreateDefaultClient(caCert)
 
 	client := davclient.NewClient(config, httpClient, f.logger)
 
@@ -55,4 +51,15 @@ func (f *factory) SetConfig(config davconf.Config) {
 		"exists": newExistsCmd(client),
 		"delete": newDeleteCmd(client),
 	}
+}
+
+func loadCaCert(config davconf.Config) *x509.CertPool {
+	if len(config.CaCert) == 0 {
+		return nil
+	}
+
+	caCert := x509.NewCertPool()
+	caCert.AppendCertsFromPEM([]byte(config.CaCert))
+
+	return caCert
 }

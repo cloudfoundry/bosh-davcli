@@ -1,6 +1,6 @@
 {
     "user":"some user",
     "password":"some pwd",
-    "endpoint":"http://example.com/some/endpoint",
-    "CA":"ca-cert"
+    "endpoint":"https://example.com/some/endpoint",
+    "ca_cert":"ca-cert"
 }

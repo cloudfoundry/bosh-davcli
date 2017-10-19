@@ -51,12 +51,12 @@ func init() {
 			expectedConfig := davconf.Config{
 				User:     "some user",
 				Password: "some pwd",
-				Endpoint: "http://example.com/some/endpoint",
-				CA:       "ca-cert",
+				Endpoint: "https://example.com/some/endpoint",
+				CaCert:   "ca-cert",
 			}
 
 			Expect(runner.Config).To(Equal(expectedConfig))
-			Expect(runner.Config.CA).ToNot(BeNil())
+			Expect(runner.Config.CaCert).ToNot(BeNil())
 		})
 
 		It("runs the put command", func() {
@@ -73,7 +73,7 @@ func init() {
 			}
 
 			Expect(runner.Config).To(Equal(expectedConfig))
-			Expect(runner.Config.CA).To(BeEmpty())
+			Expect(runner.Config.CaCert).To(BeEmpty())
 			Expect(runner.RunArgs).To(Equal([]string{"put", "localFile", "remoteFile"}))
 		})
 
