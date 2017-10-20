@@ -8,11 +8,12 @@ import (
 	davconf "github.com/cloudfoundry/bosh-davcli/config"
 	boshhttpclient "github.com/cloudfoundry/bosh-utils/httpclient"
 	boshlog "github.com/cloudfoundry/bosh-utils/logger"
+	boshcrypto "github.com/cloudfoundry/bosh-utils/crypto"
 )
 
 type Factory interface {
 	Create(name string) (cmd Cmd, err error)
-	SetConfig(config davconf.Config)
+	SetConfig(config davconf.Config) (err error)
 }
 
 func NewFactory(logger boshlog.Logger) Factory {
@@ -36,16 +37,15 @@ func (f *factory) Create(name string) (cmd Cmd, err error) {
 	return
 }
 
-func (f *factory) SetConfig(config davconf.Config) {
+func (f *factory) SetConfig(config davconf.Config) (err error) {
 	var httpClient boshhttpclient.Client
-	var caCert *x509.CertPool
+	var certPool *x509.CertPool
 
 	if len(config.CACert) != 0 {
-		caCert = x509.NewCertPool()
-		caCert.AppendCertsFromPEM([]byte(config.CACert))
+		certPool, err = boshcrypto.CertPoolFromPEM([]byte(config.CACert))
 	}
 
-	httpClient = boshhttpclient.CreateDefaultClient(caCert)
+	httpClient = boshhttpclient.CreateDefaultClient(certPool)
 
 	client := davclient.NewClient(config, httpClient, f.logger)
 
@@ -55,4 +55,6 @@ func (f *factory) SetConfig(config davconf.Config) {
 		"exists": newExistsCmd(client),
 		"delete": newDeleteCmd(client),
 	}
+
+	return
 }
