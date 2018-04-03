@@ -56,6 +56,13 @@
   packages = [
     ".",
     "config",
+    "ginkgo",
+    "ginkgo/convert",
+    "ginkgo/interrupthandler",
+    "ginkgo/nodot",
+    "ginkgo/testrunner",
+    "ginkgo/testsuite",
+    "ginkgo/watch",
     "internal/codelocation",
     "internal/containernode",
     "internal/failer",
@@ -166,6 +173,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "bfad7a31019c186776ed397718af6ee2cd19d62f11fa5b23b78fa90c59394fd0"
+  inputs-digest = "00714df190d77a10f4cea469d7be211bdb761e3354b3def355f6a827fb63b2e0"
   solver-name = "gps-cdcl"
   solver-version = 1

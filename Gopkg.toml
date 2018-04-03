@@ -1,3 +1,5 @@
+required = ["github.com/onsi/ginkgo/ginkgo"]
+
 [[constraint]]
   branch = "master"
   name = "github.com/cloudfoundry/bosh-utils"
