@@ -1,7 +1,7 @@
 required = ["github.com/onsi/ginkgo/ginkgo"]
 
 [[constraint]]
-  branch = "master"
+  branch = "test-dep"
   name = "github.com/cloudfoundry/bosh-utils"
 
 [[constraint]]
@@ -16,3 +16,7 @@ required = ["github.com/onsi/ginkgo/ginkgo"]
   go-tests = true
   non-go = true
   unused-packages = true
+
+[[override]]
+  name = "gopkg.in/fsnotify.v1"
+  source = "https://github.com/fsnotify/fsnotify.git"
