@@ -113,18 +113,6 @@ var _ = Describe("Client", func() {
 		})
 
 		Context("when the status code is not in the 2xx range", func() {
-			It("returns an error saying an unexpected error occurred when the status code is less than 200", func() {
-				server.AppendHandlers(
-					ghttp.RespondWith(199, ""),
-					ghttp.RespondWith(199, ""),
-					ghttp.RespondWith(199, ""),
-				)
-
-				err := client.Delete("/somefile")
-				Expect(err).To(HaveOccurred())
-				Expect(err).To(MatchError(Equal("Deleting blob '/somefile': invalid status: 199")))
-			})
-
 			It("returns an error saying an unexpected error occurred when the status code is greater than 299", func() {
 				server.AppendHandlers(
 					ghttp.RespondWith(300, ""),
