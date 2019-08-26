@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	davclient "github.com/cloudfoundry/bosh-davcli/client"
-	"strconv"
+	"time"
 )
 
 type SignCmd struct {
@@ -24,9 +24,9 @@ func (cmd SignCmd) Run(args []string) (err error) {
 
 	objectID, action := args[0], args[1]
 
-	expiration, err := strconv.ParseInt(args[2], 10, 64)
+	expiration, err := time.ParseDuration(args[2])
 	if err != nil {
-		err = fmt.Errorf("expiration should be an integer value representing seconds. Got: %s", args[2])
+		err = fmt.Errorf("expiration should be a duration value eg: 45s or 1h43m. Got: %s", args[2])
 		return
 	}
 

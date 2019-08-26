@@ -28,7 +28,7 @@ var _ = Describe("SignCmd", func() {
 	)
 
 	It("with valid args", func() {
-		err := runSign(config, []string{objectID, "get", "600"})
+		err := runSign(config, []string{objectID, "get", "15m"})
 		Expect(err).ToNot(HaveOccurred())
 	})
 
@@ -36,5 +36,17 @@ var _ = Describe("SignCmd", func() {
 		err := runSign(davconf.Config{}, []string{})
 		Expect(err).To(HaveOccurred())
 		Expect(err.Error()).To(ContainSubstring("incorrect usage"))
+	})
+
+	It("returns err with non-implemented action", func() {
+		err := runSign(davconf.Config{}, []string{objectID, "delete", "15m"})
+		Expect(err).To(HaveOccurred())
+		Expect(err.Error()).To(ContainSubstring("action not implemented"))
+	})
+
+	It("returns err with incorrect duration", func() {
+		err := runSign(davconf.Config{}, []string{objectID, "put", "15"})
+		Expect(err).To(HaveOccurred())
+		Expect(err.Error()).To(ContainSubstring("expiration should be a duration value"))
 	})
 })

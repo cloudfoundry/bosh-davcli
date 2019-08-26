@@ -22,7 +22,7 @@ type Client interface {
 	Put(path string, content io.ReadCloser, contentLength int64) (err error)
 	Exists(path string) (err error)
 	Delete(path string) (err error)
-	Sign(objectID, action string, duration int64) (string, error)
+	Sign(objectID, action string, duration time.Duration) (string, error)
 }
 
 func NewClient(config davconf.Config, httpClient httpclient.Client, logger boshlog.Logger) (c Client) {
@@ -135,7 +135,7 @@ func (c client) Delete(path string) error {
 	return nil
 }
 
-func (c client) Sign(objectID, action string, duration int64) (string, error) {
+func (c client) Sign(objectID, action string, duration time.Duration) (string, error) {
 	signer := URLsigner.NewSigner(c.config.Secret)
 	signTime := time.Now()
 
