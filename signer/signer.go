@@ -26,7 +26,7 @@ func NewSigner(secret string) Signer {
 
 func (s *signer) GenerateSignature(objectID, verb string, timeStamp, expires time.Time) string {
 	verb = strings.ToUpper(verb)
-	signature := fmt.Sprintf("%s\n%s\n%d\n%d", verb, objectID, timeStamp.Unix(), expires.Unix())
+	signature := fmt.Sprintf("%s%s%d%d", verb, objectID, timeStamp.Unix(), expires.Unix())
 	hmac := hmac.New(sha256.New, []byte(s.secret))
 	hmac.Write([]byte(signature))
 	return hex.EncodeToString(hmac.Sum(nil))
@@ -42,5 +42,5 @@ func (s *signer) GenerateSignedURL(blobstorePath, objectID, verb string, timeSta
 	invalidAfter := timeStamp.Add(expiration)
 	signature := s.GenerateSignature(objectID, verb, timeStamp, invalidAfter)
 
-	return fmt.Sprintf("%s/%s?st=%s&ts=%d&e=%d", blobstorePath, objectID, signature, timeStamp.Unix(), invalidAfter.Unix()), nil
+	return fmt.Sprintf("%s/signed/%s?st=%s&ts=%d&e=%d", blobstorePath, objectID, signature, timeStamp.Unix(), invalidAfter.Unix()), nil
 }

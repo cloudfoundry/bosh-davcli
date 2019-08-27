@@ -22,14 +22,8 @@ The command `sign` generates a pre-signed url for a specific object, action and 
 The request will be signed using HMAC-SHA256 with a secret provided in configuration.
 
 The HMAC format is:
-```
-{
-    <HTTP Verb>\n
-    <Object ID>\n
-    <Unix timestamp of the signature time>\n
-    <Unix timestamp of the expiration time>
-}
-```
+`<HTTP Verb><Object ID><Unix timestamp of the signature time><Unix timestamp of the expiration time>`
+
 The generated URL will be of format:
 
-`https://some.url/object-id?st=the-HMAC-signature&ts=GenerationTimestamp&e=ExpirationTimestamp`
+`https://blobstore.url/signed/object-id?st=HMACSignatureHash&ts=GenerationTimestamp&e=ExpirationTimestamp`
