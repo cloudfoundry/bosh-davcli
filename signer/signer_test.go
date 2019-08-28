@@ -16,7 +16,7 @@ var _ = Describe("Signer", func() {
 	timeStamp := time.Date(2019, 8, 26, 11, 11, 0, 0, time.UTC)
 
 	Context("HMAC signature", func() {
-		expected := "6140482f6d5846c158ff0f8dad88803d49c88657a716e2c46ba5ac41486918b2"
+		expected := "YUBIL21YRsFY_w-NrYiAPUnIhlenFuLEa6WsQUhpGLI"
 
 		It("generates a HMAC signature", func() {
 			expirationTime := timeStamp.Add(duration)
@@ -28,7 +28,7 @@ var _ = Describe("Signer", func() {
 
 	Context("HMAC Signed URL", func() {
 		path := "http://api.foo.bar/"
-		expected := "http://api.foo.bar/signed/fake-object-id?st=6140482f6d5846c158ff0f8dad88803d49c88657a716e2c46ba5ac41486918b2&ts=1566817860&e=1566818760"
+		expected := "http://api.foo.bar/signed/fake-object-id?st=YUBIL21YRsFY_w-NrYiAPUnIhlenFuLEa6WsQUhpGLI&ts=1566817860&e=1566818760"
 
 		It("Generates a properly formed URL", func() {
 			actual, err := signer.GenerateSignedURL(path, objectID, verb, timeStamp, duration)

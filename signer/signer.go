@@ -3,7 +3,7 @@ package signer
 import (
 	"crypto/hmac"
 	"crypto/sha256"
-	"encoding/hex"
+	"encoding/base64"
 	"fmt"
 	"strings"
 	"time"
@@ -29,7 +29,8 @@ func (s *signer) GenerateSignature(objectID, verb string, timeStamp, expires tim
 	signature := fmt.Sprintf("%s%s%d%d", verb, objectID, timeStamp.Unix(), expires.Unix())
 	hmac := hmac.New(sha256.New, []byte(s.secret))
 	hmac.Write([]byte(signature))
-	return hex.EncodeToString(hmac.Sum(nil))
+	sigBytes := hmac.Sum(nil)
+	return base64.URLEncoding.WithPadding(base64.NoPadding).EncodeToString(sigBytes)
 }
 
 func (s *signer) GenerateSignedURL(blobstorePath, objectID, verb string, timeStamp time.Time, expiration time.Duration) (string, error) {
