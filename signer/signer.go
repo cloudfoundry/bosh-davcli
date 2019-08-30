@@ -42,5 +42,5 @@ func (s *signer) GenerateSignedURL(endpoint, prefixedBlobID, verb string, timeSt
 	expiresAfterSeconds := int(expiresAfter.Seconds())
 	signature := s.generateSignature(prefixedBlobID, verb, timeStamp, expiresAfterSeconds)
 
-	return fmt.Sprintf("%s/signed/%s?st=%s&ts=%d&e=%d", endpoint, prefixedBlobID, signature, timeStamp.Unix(), expiresAfterSeconds), nil
+	return fmt.Sprintf("%s/%s?st=%s&ts=%d&e=%d", endpoint, prefixedBlobID, signature, timeStamp.Unix(), expiresAfterSeconds), nil
 }
