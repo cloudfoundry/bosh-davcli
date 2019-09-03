@@ -1,6 +1,7 @@
 package signer_test
 
 import (
+	"fmt"
 	"github.com/cloudfoundry/bosh-davcli/signer"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -18,11 +19,12 @@ var _ = Describe("Signer", func() {
 
 	Context("HMAC Signed URL", func() {
 
-		expected := "http://api.foo.bar/fake-object-id?st=BxLKZK_dTSLyBis1pAjdwq4aYVrJvXX6vvLpdCClGYo&ts=1566817860&e=900"
+		expected := "http://api.foo.bar/signed/fake-object-id?e=900&st=BxLKZK_dTSLyBis1pAjdwq4aYVrJvXX6vvLpdCClGYo&ts=1566817860"
 
 		It("Generates a properly formed URL", func() {
 			actual, err := signer.GenerateSignedURL(path, objectID, verb, timeStamp, duration)
-
+			fmt.Println(actual)
+			fmt.Println(expected)
 			Expect(err).To(BeNil())
 			Expect(actual).To(Equal(expected))
 		})
