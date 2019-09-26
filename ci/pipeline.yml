@@ -16,7 +16,7 @@ jobs:
 
   - name: promote
     plan:
-      - aggregate:
+      - in_parallel:
         - get: davcli-src
           trigger: true
           passed:
@@ -25,7 +25,7 @@ jobs:
         params:
           bump: patch
 
-      - aggregate:
+      - in_parallel:
         - task: build-linux
           file: davcli-src/ci/tasks/build.yml
           output_mapping: { out: out-linux }
@@ -45,7 +45,7 @@ jobs:
             GOOS: windows
             GOARCH: amd64
 
-      - aggregate:
+      - in_parallel:
         - put: release-bucket-linux
           params: {file: out-linux/davcli-*-linux-amd64}
         - put: release-bucket-linux-ppc64le
