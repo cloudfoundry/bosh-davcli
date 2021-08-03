@@ -1,10 +1,4 @@
 ---
-groups:
-  - name: davcli
-    jobs:
-      - test
-      - promote
-
 jobs:
   - name: test
     serial: true
