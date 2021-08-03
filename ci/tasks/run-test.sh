@@ -12,6 +12,4 @@ cd ${repo}
 echo -e "\n Vetting packages for potential issues..."
 ./bin/govet
 
-./bin/install-ginkgo
-
 ./bin/test-unit
