@@ -1,6 +1,10 @@
 package cmd_test
 
 import (
+	"bytes"
+	"io"
+	"os"
+
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
@@ -28,8 +32,31 @@ var _ = Describe("SignCmd", func() {
 	)
 
 	It("with valid args", func() {
+		old := os.Stdout // keep backup of the real stdout
+		r, w, _ := os.Pipe()
+		os.Stdout = w
+
 		err := runSign(config, []string{objectID, "get", "15m"})
+
+		outC := make(chan string)
+		// copy the output in a separate goroutine so printing can't block indefinitely
+		go func() {
+			var buf bytes.Buffer
+			io.Copy(&buf, r)
+			outC <- buf.String()
+		}()
+
+		// back to normal state
+		w.Close()
+		os.Stdout = old // restoring the real stdout
+		out := <-outC
+
 		Expect(err).ToNot(HaveOccurred())
+		Expect(out).To(HavePrefix("signed/"))
+		Expect(out).To(ContainSubstring(objectID))
+		Expect(out).To(ContainSubstring("?e="))
+		Expect(out).To(ContainSubstring("&st="))
+		Expect(out).To(ContainSubstring("&ts="))
 	})
 
 	It("returns err with incorrect arg count", func() {
