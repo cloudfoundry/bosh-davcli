@@ -214,7 +214,7 @@ var _ = Describe("Client", func() {
 				Expect(req.Header.Get("Authorization")).NotTo(BeEmpty())
 			})
 
-			Context("when no user nor password is provided in blobstore options", func() {
+			Context("when neither user nor password is provided in blobstore options", func() {
 				BeforeEach(func() {
 					config.User = ""
 					config.Password = ""
