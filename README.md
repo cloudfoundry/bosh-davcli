@@ -12,6 +12,13 @@ To update dependencies, use `gvt update`. Here is a typical invocation to update
 gvt update github.com/cloudfoundry/bosh-utils
 ```
 
+### Run tests
+
+You can run the unit test with `ginkgo` as follows.
+
+```
+ginkgo -r -race -progress -mod vendor .
+```
 
 # Pre-signed URLs
 

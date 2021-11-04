@@ -201,6 +201,38 @@ var _ = Describe("Client", func() {
 				)
 				itUploadsABlob()
 			})
+
+			It("adds an Authorizatin header to the request", func() {
+				server.AppendHandlers(
+					ghttp.CombineHandlers(
+						ghttp.RespondWith(204, ""),
+						ghttp.VerifyBody([]byte("content")),
+					),
+				)
+				itUploadsABlob()
+				req := server.ReceivedRequests()[0]
+				Expect(req.Header.Get("Authorization")).NotTo(BeEmpty())
+			})
+
+			Context("when neither user nor password is provided in blobstore options", func() {
+				BeforeEach(func() {
+					config.User = ""
+					config.Password = ""
+					client = NewClient(config, httpclient.DefaultClient, logger)
+				})
+
+				It("sends a request with no Basic Auth header", func() {
+					server.AppendHandlers(
+						ghttp.CombineHandlers(
+							ghttp.RespondWith(204, ""),
+							ghttp.VerifyBody([]byte("content")),
+						),
+					)
+					itUploadsABlob()
+					req := server.ReceivedRequests()[0]
+					Expect(req.Header.Get("Authorization")).To(BeEmpty())
+				})
+			})
 		})
 
 		Context("when the http request fails", func() {

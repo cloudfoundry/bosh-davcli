@@ -23,8 +23,6 @@ var _ = Describe("Signer", func() {
 
 		It("Generates a properly formed URL", func() {
 			actual, err := signer.GenerateSignedURL(path, objectID, verb, timeStamp, duration)
-			fmt.Println(actual)
-			fmt.Println(expected)
 			Expect(err).To(BeNil())
 			Expect(actual).To(Equal(expected))
 		})
