@@ -1,7 +1,6 @@
 package signer_test
 
 import (
-	"fmt"
 	"github.com/cloudfoundry/bosh-davcli/signer"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
