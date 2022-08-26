@@ -5,6 +5,6 @@ image_resource:
   source: {repository: bosh/s3cli}
 inputs:
 - name: davcli-src
-  path: src/github.com/cloudfoundry/bosh-davcli
+  path: bosh-davcli
 run:
-  path: src/github.com/cloudfoundry/bosh-davcli/ci/tasks/run-test.sh
+  path: bosh-davcli/ci/tasks/run-test.sh
