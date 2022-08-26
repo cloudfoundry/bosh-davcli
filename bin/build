@@ -1,7 +1,29 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+my_dir="$( cd "$(dirname "${0}")" && pwd )"
+release_dir="$( cd "${my_dir}" && cd .. && pwd )"
 
-bin=$(dirname $0)
+make_version() {
+    local git_rev
+    local timestamp
+    git_rev=$(cd "${release_dir}" && git rev-parse --short HEAD)=$(git rev-parse --short HEAD)
+    timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
-$bin/go build -o $bin/../out/dav-cli github.com/cloudfoundry/bosh-davcli/main
+    echo "0.0.0-dev-${git_rev}-${timestamp}"
+}
+
+VERSION="${VERSION:-$(make_version)}"
+BINNAME="${BINNAME:-"davcli"}"
+
+pushd "${release_dir}" > /dev/null
+  echo "building: out/${BINNAME}"
+  go build -ldflags "-X main.version=${VERSION}" \
+    -o "out/${BINNAME}" \
+    github.com/cloudfoundry/bosh-davcli/main
+
+  if command -v sha1sum &> /dev/null; then
+    echo "sha1 of out/${BINNAME}:"
+    sha1sum "out/${BINNAME}"
+  fi
+popd
