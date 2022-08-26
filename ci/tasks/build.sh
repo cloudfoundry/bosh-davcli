@@ -25,7 +25,7 @@ make_version() {
 
 make_binname() {
   GOOS="${GOOS:-$(go env GOOS)}"
-  GOARCH="${GOOS:-$(go env GOARCH)}"
+  GOARCH="${GOARCH:-$(go env GOARCH)}"
   local binname
   binname="davcli-$(get_semver)-${GOOS}-${GOARCH}"
 
