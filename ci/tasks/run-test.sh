@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
-set -eu
+repo="$( cd "$(dirname "${0}")" && pwd )/../.."
 
-repo="$( cd $(dirname $0) && pwd )/../.."
-
-export GOPATH="$repo/../../../.."
+export GOPATH="${repo}/../../../.."
 export PATH=${GOPATH}/bin:${PATH}
 
-cd ${repo}
+cd "${repo}"
 
 echo -e "\n Vetting packages for potential issues..."
 ./bin/govet
