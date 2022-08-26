@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo="$( cd "$(dirname "${0}")" && pwd )/../.."
+my_dir="$( cd "$(dirname "${0}")" && pwd )"
+release_dir="$( cd "${my_dir}" && cd ../.. && pwd )"
 
-export GOPATH="${repo}/../../../.."
-export PATH=${GOPATH}/bin:${PATH}
-
-cd "${repo}"
-
-echo -e "\n Vetting packages for potential issues..."
-./bin/govet
-
-./bin/test-unit
+pushd "${release_dir}" > /dev/null
+  bin/test
+popd > /dev/null
