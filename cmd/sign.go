@@ -3,8 +3,9 @@ package cmd
 import (
 	"errors"
 	"fmt"
-	davclient "github.com/cloudfoundry/bosh-davcli/client"
 	"time"
+
+	davclient "github.com/cloudfoundry/bosh-davcli/client"
 )
 
 type SignCmd struct {

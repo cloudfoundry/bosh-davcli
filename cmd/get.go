@@ -2,9 +2,10 @@ package cmd
 
 import (
 	"errors"
-	davclient "github.com/cloudfoundry/bosh-davcli/client"
 	"io"
 	"os"
+
+	davclient "github.com/cloudfoundry/bosh-davcli/client"
 )
 
 type GetCmd struct {
