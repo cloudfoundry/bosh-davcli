@@ -6,6 +6,8 @@ release_dir="$( cd "${my_dir}" && cd .. && pwd )"
 
 pushd "${release_dir}" > /dev/null
   if ! command -v golangci-lint &> /dev/null; then
+    go_bin="$(go env GOPATH)/bin"
+    export PATH=${go_bin}:${PATH}
     go install -v github.com/golangci/golangci-lint/cmd/golangci-lint@latest
   fi
   golangci-lint run --enable goimports ./...
