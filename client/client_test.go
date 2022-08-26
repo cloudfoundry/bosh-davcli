@@ -1,7 +1,7 @@
 package client_test
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 
@@ -173,7 +173,7 @@ var _ = Describe("Client", func() {
 	Describe("Put", func() {
 		Context("When the put request succeeds", func() {
 			itUploadsABlob := func() {
-				body := ioutil.NopCloser(strings.NewReader("content"))
+				body := io.NopCloser(strings.NewReader("content"))
 				err := client.Put("/", body, int64(7))
 				Expect(err).NotTo(HaveOccurred())
 
@@ -245,7 +245,7 @@ var _ = Describe("Client", func() {
 			})
 
 			It("returns err", func() {
-				body := ioutil.NopCloser(strings.NewReader("content"))
+				body := io.NopCloser(strings.NewReader("content"))
 				err := client.Put("/", body, int64(7))
 				Expect(err).To(HaveOccurred())
 				Expect(err).To(MatchError(ContainSubstring("Putting dav blob /: Put \"%s/42\": EOF", server.URL())))
@@ -263,7 +263,7 @@ var _ = Describe("Client", func() {
 			})
 
 			It("returns err", func() {
-				body := ioutil.NopCloser(strings.NewReader("content"))
+				body := io.NopCloser(strings.NewReader("content"))
 				err := client.Put("/", body, int64(7))
 				Expect(err).To(HaveOccurred())
 				Expect(err).To(MatchError(ContainSubstring("Putting dav blob /: Wrong response code: 300")))
@@ -287,7 +287,7 @@ var _ = Describe("Client", func() {
 		})
 
 		It("tries the specified number of times", func() {
-			body := ioutil.NopCloser(strings.NewReader("content"))
+			body := io.NopCloser(strings.NewReader("content"))
 			err := client.Put("/", body, int64(7))
 			Expect(err).To(HaveOccurred())
 			Expect(err).To(MatchError(ContainSubstring("Putting dav blob /: Put \"%s/42\": EOF", server.URL())))

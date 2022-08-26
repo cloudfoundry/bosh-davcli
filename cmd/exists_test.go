@@ -16,7 +16,7 @@ import (
 func runExists(config davconf.Config, args []string) error {
 	logger := boshlog.NewLogger(boshlog.LevelNone)
 	factory := NewFactory(logger)
-	factory.SetConfig(config)
+	factory.SetConfig(config) //nolint:errcheck
 
 	cmd, err := factory.Create("exists")
 	Expect(err).ToNot(HaveOccurred())

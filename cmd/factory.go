@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"crypto/x509"
+
 	davclient "github.com/cloudfoundry/bosh-davcli/client"
 	davconf "github.com/cloudfoundry/bosh-davcli/config"
 	boshcrypto "github.com/cloudfoundry/bosh-utils/crypto"
@@ -24,7 +25,7 @@ func NewFactory(logger boshlog.Logger) Factory {
 }
 
 type factory struct {
-	config davconf.Config
+	config davconf.Config //nolint:unused
 	cmds   map[string]Cmd
 	logger boshlog.Logger
 }

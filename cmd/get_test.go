@@ -1,7 +1,7 @@
 package cmd_test
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -19,7 +19,7 @@ import (
 func runGet(config davconf.Config, args []string) error {
 	logger := boshlog.NewLogger(boshlog.LevelNone)
 	factory := NewFactory(logger)
-	factory.SetConfig(config)
+	factory.SetConfig(config) //nolint:errcheck
 
 	cmd, err := factory.Create("get")
 	Expect(err).ToNot(HaveOccurred())
@@ -31,7 +31,7 @@ func getFileContent(path string) string {
 	file, err := os.Open(path)
 	Expect(err).ToNot(HaveOccurred())
 
-	fileBytes, err := ioutil.ReadAll(file)
+	fileBytes, err := io.ReadAll(file)
 	Expect(err).ToNot(HaveOccurred())
 
 	return string(fileBytes)
@@ -60,13 +60,13 @@ var _ = Describe("GetCmd", func() {
 			Expect(username).To(Equal("some user"))
 			Expect(password).To(Equal("some pwd"))
 
-			w.Write([]byte("this is your blob"))
+			w.Write([]byte("this is your blob")) //nolint:errcheck
 		}
 
 	})
 
 	AfterEach(func() {
-		os.RemoveAll(targetFilePath)
+		os.RemoveAll(targetFilePath) //nolint:errcheck
 		ts.Close()
 	})
 

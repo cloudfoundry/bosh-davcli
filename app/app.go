@@ -5,10 +5,11 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"io"
+	"os"
+
 	davcmd "github.com/cloudfoundry/bosh-davcli/cmd"
 	davconfig "github.com/cloudfoundry/bosh-davcli/config"
-	"io/ioutil"
-	"os"
 )
 
 type App struct {
@@ -49,7 +50,7 @@ func (app App) Run(args []string) (err error) {
 		return
 	}
 
-	configBytes, err := ioutil.ReadAll(file)
+	configBytes, err := io.ReadAll(file)
 	if err != nil {
 		return
 	}

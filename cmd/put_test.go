@@ -1,7 +1,7 @@
 package cmd_test
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -19,7 +19,7 @@ import (
 func runPut(config davconf.Config, args []string) error {
 	logger := boshlog.NewLogger(boshlog.LevelNone)
 	factory := NewFactory(logger)
-	factory.SetConfig(config)
+	factory.SetConfig(config) //nolint:errcheck
 
 	cmd, err := factory.Create("put")
 	Expect(err).ToNot(HaveOccurred())
@@ -31,7 +31,7 @@ func fileBytes(path string) []byte {
 	file, err := os.Open(path)
 	Expect(err).ToNot(HaveOccurred())
 
-	content, err := ioutil.ReadAll(file)
+	content, err := io.ReadAll(file)
 	Expect(err).ToNot(HaveOccurred())
 
 	return content
@@ -69,7 +69,7 @@ var _ = Describe("PutCmd", func() {
 				Expect(password).To(Equal("some pwd"))
 
 				expectedBytes := fileBytes(sourceFilePath)
-				actualBytes, _ := ioutil.ReadAll(r.Body)
+				actualBytes, _ := io.ReadAll(r.Body)
 				Expect(expectedBytes).To(Equal(actualBytes))
 
 				w.WriteHeader(201)

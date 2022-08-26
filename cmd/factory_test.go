@@ -15,7 +15,7 @@ func buildFactory() (factory Factory) {
 	config := davconf.Config{User: "some user"}
 	logger := boshlog.NewLogger(boshlog.LevelNone)
 	factory = NewFactory(logger)
-	factory.SetConfig(config)
+	factory.SetConfig(config) //nolint:errcheck
 	return
 }
 

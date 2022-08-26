@@ -17,7 +17,7 @@ import (
 func runSign(config davconf.Config, args []string) error {
 	logger := boshlog.NewLogger(boshlog.LevelNone)
 	factory := NewFactory(logger)
-	factory.SetConfig(config)
+	factory.SetConfig(config) //nolint:errcheck
 
 	cmd, err := factory.Create("sign")
 	Expect(err).ToNot(HaveOccurred())
@@ -42,7 +42,7 @@ var _ = Describe("SignCmd", func() {
 		// copy the output in a separate goroutine so printing can't block indefinitely
 		go func() {
 			var buf bytes.Buffer
-			io.Copy(&buf, r)
+			io.Copy(&buf, r) //nolint:errcheck
 			outC <- buf.String()
 		}()
 

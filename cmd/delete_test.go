@@ -17,7 +17,7 @@ import (
 func runDelete(config davconf.Config, args []string) error {
 	logger := boshlog.NewLogger(boshlog.LevelNone)
 	factory := NewFactory(logger)
-	factory.SetConfig(config)
+	factory.SetConfig(config) //nolint:errcheck
 
 	cmd, err := factory.Create("delete")
 	Expect(err).ToNot(HaveOccurred())

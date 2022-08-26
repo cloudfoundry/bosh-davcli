@@ -1,16 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+my_dir="$( cd "$(dirname "${0}")" && pwd )"
+release_dir="$( cd "${my_dir}" && cd .. && pwd )"
 
-bin=$(dirname $0)
+pushd "${release_dir}" > /dev/null
+  if ! command -v golangci-lint &> /dev/null; then
+    go install -v github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+  fi
+  golangci-lint run ./...
 
-# Travis randomly kills go builds when using -race
-race=""
-if [ -z "$TRAVIS" ]; then
-  race="-race"
-fi
-
-$bin/clean
-$bin/install-ginkgo
-$bin/test-prepare
-$bin/test-unit
+  go run github.com/onsi/ginkgo/ginkgo -race -trace ./...
+popd > /dev/null
