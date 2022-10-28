@@ -17,7 +17,7 @@ VERSION="${VERSION:-$(make_version)}"
 BINNAME="${BINNAME:-"davcli"}"
 
 pushd "${release_dir}" > /dev/null
-  echo "building: out/${BINNAME}"
+  echo "building with $(go version): out/${BINNAME}"
   go build -ldflags "-X main.version=${VERSION}" \
     -o "out/${BINNAME}" \
     github.com/cloudfoundry/bosh-davcli/main
