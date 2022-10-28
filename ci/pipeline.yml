@@ -4,8 +4,11 @@ jobs:
     serial: true
     plan:
       - {trigger: true, get: davcli-src}
+      - get: s3cli-docker-image
+        trigger: true
 
       - task: test
+        image: s3cli-docker-image
         file: davcli-src/ci/tasks/run-test.yml
 
   - name: promote
@@ -15,24 +18,31 @@ jobs:
           trigger: true
           passed:
             - test
+        - get: s3cli-docker-image
+          trigger: true
+          passed:
+            - test
       - get: version-semver
         params:
           bump: patch
 
       - in_parallel:
         - task: build-linux
+          image: s3cli-docker-image
           file: davcli-src/ci/tasks/build.yml
           output_mapping: { out: out-linux }
           params:
             GOOS: linux
             GOARCH: amd64
         - task: build-linux-ppc64le
+          image: s3cli-docker-image
           file: davcli-src/ci/tasks/build.yml
           output_mapping: { out: out-linux-ppc64le }
           params:
             GOOS: linux
             GOARCH: ppc64le
         - task: build-windows
+          image: s3cli-docker-image
           file: davcli-src/ci/tasks/build.yml
           output_mapping: { out: out-windows }
           params:
@@ -127,3 +137,10 @@ resources:
       start: 3:00 -0700
       stop: 4:30 -0700
       days: [ Saturday ]
+
+  - name: s3cli-docker-image
+    type: docker-image
+    source:
+      repository: bosh/s3cli
+      username: ((dockerhub_username))
+      password: ((dockerhub_password))
