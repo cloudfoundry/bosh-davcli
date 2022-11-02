@@ -4,5 +4,5 @@ set -e
 
 bin=$(dirname $0)
 
-echo -e "\n Testing packages..."
+echo -e "\n Testing packages... with go version $(go version)"
 go run github.com/onsi/ginkgo/ginkgo -r $race -trace -skipPackage vendor $@
