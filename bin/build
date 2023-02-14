@@ -15,6 +15,7 @@ make_version() {
 
 VERSION="${VERSION:-$(make_version)}"
 BINNAME="${BINNAME:-"davcli"}"
+export CGO_ENABLED=0
 
 pushd "${release_dir}" > /dev/null
   echo "building with $(go version): out/${BINNAME}"
