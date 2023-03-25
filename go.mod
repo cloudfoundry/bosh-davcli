@@ -3,20 +3,20 @@ module github.com/cloudfoundry/bosh-davcli
 go 1.20
 
 require (
-	github.com/cloudfoundry/bosh-utils v0.0.358
+	github.com/cloudfoundry/bosh-utils v0.0.359
 	github.com/onsi/ginkgo v1.16.5
-	github.com/onsi/gomega v1.27.1
+	github.com/onsi/gomega v1.27.3
 )
 
 require (
-	code.cloudfoundry.org/tlsconfig v0.0.0-20230225100352-b3e9427a4d77 // indirect
+	code.cloudfoundry.org/tlsconfig v0.0.0-20230320190829-8f91c367795b // indirect
 	github.com/bmatcuk/doublestar v1.3.4 // indirect
 	github.com/charlievieth/fs v0.0.3 // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20180221174514-54f73bdb8a8e // indirect
 	github.com/cloudfoundry/socks5-proxy v0.2.86 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20210107165309-348f09dbbbc0 // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/jpillora/backoff v1.0.0 // indirect
 	github.com/kr/text v0.2.0 // indirect
