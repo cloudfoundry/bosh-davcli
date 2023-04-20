@@ -112,24 +112,27 @@ resources:
     source:
       regexp: davcli-(.*)-linux-amd64
       bucket: davcli
-      access_key_id: ((bosh-davcli-upload_aws_access_key.username))
-      secret_access_key: ((bosh-davcli-upload_aws_access_key.password))
+      access_key_id: ((bosh-davcli-upload_assume_aws_access_key.username))
+      secret_access_key: ((bosh-davcli-upload_assume_aws_access_key.password))
+      aws_role_arn: ((bosh-davcli-upload_assume_aws_access_key.role_arn))
 
   - name: release-bucket-linux-ppc64le
     type: s3
     source:
       regexp: davcli-(.*)-linux-ppc64le
       bucket: davcli
-      access_key_id: ((bosh-davcli-upload_aws_access_key.username))
-      secret_access_key: ((bosh-davcli-upload_aws_access_key.password))
+      access_key_id: ((bosh-davcli-upload_assume_aws_access_key.username))
+      secret_access_key: ((bosh-davcli-upload_assume_aws_access_key.password))
+      aws_role_arn: ((bosh-davcli-upload_assume_aws_access_key.role_arn))
 
   - name: release-bucket-windows
     type: s3
     source:
       regexp: davcli-(.*)-windows-amd64.exe
       bucket: davcli
-      access_key_id: ((bosh-davcli-upload_aws_access_key.username))
-      secret_access_key: ((bosh-davcli-upload_aws_access_key.password))
+      access_key_id: ((bosh-davcli-upload_assume_aws_access_key.username))
+      secret_access_key: ((bosh-davcli-upload_assume_aws_access_key.password))
+      aws_role_arn: ((bosh-davcli-upload_assume_aws_access_key.role_arn))
 
   - name: weekly
     type: time
