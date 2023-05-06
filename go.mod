@@ -3,7 +3,7 @@ module github.com/cloudfoundry/bosh-davcli
 go 1.20
 
 require (
-	github.com/cloudfoundry/bosh-utils v0.0.361
+	github.com/cloudfoundry/bosh-utils v0.0.362
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.27.4
 )
@@ -13,7 +13,7 @@ require (
 	github.com/bmatcuk/doublestar v1.3.4 // indirect
 	github.com/charlievieth/fs v0.0.3 // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20180221174514-54f73bdb8a8e // indirect
-	github.com/cloudfoundry/socks5-proxy v0.2.88 // indirect
+	github.com/cloudfoundry/socks5-proxy v0.2.89 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
@@ -26,7 +26,7 @@ require (
 	github.com/rogpeppe/go-internal v1.8.0 // indirect
 	golang.org/x/crypto v0.8.0 // indirect
 	golang.org/x/net v0.9.0 // indirect
-	golang.org/x/sys v0.7.0 // indirect
+	golang.org/x/sys v0.8.0 // indirect
 	golang.org/x/text v0.9.0 // indirect
 	golang.org/x/tools v0.8.0 // indirect
 	google.golang.org/protobuf v1.28.0 // indirect
