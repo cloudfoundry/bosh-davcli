@@ -7,8 +7,8 @@ github.com/bmatcuk/doublestar
 # github.com/charlievieth/fs v0.0.3
 ## explicit; go 1.18
 github.com/charlievieth/fs
-# github.com/cloudfoundry/bosh-utils v0.0.386
-## explicit; go 1.20
+# github.com/cloudfoundry/bosh-utils v0.0.390
+## explicit; go 1.21
 github.com/cloudfoundry/bosh-utils/crypto
 github.com/cloudfoundry/bosh-utils/errors
 github.com/cloudfoundry/bosh-utils/httpclient
@@ -19,8 +19,8 @@ github.com/cloudfoundry/bosh-utils/uuid
 # github.com/cloudfoundry/go-socks5 v0.0.0-20180221174514-54f73bdb8a8e
 ## explicit
 github.com/cloudfoundry/go-socks5
-# github.com/cloudfoundry/socks5-proxy v0.2.96
-## explicit; go 1.20
+# github.com/cloudfoundry/socks5-proxy v0.2.98
+## explicit; go 1.21
 github.com/cloudfoundry/socks5-proxy
 # github.com/fsnotify/fsnotify v1.6.0
 ## explicit; go 1.16
@@ -83,7 +83,7 @@ github.com/onsi/ginkgo/reporters/stenographer
 github.com/onsi/ginkgo/reporters/stenographer/support/go-colorable
 github.com/onsi/ginkgo/reporters/stenographer/support/go-isatty
 github.com/onsi/ginkgo/types
-# github.com/onsi/gomega v1.27.8
+# github.com/onsi/gomega v1.27.10
 ## explicit; go 1.18
 github.com/onsi/gomega
 github.com/onsi/gomega/format
