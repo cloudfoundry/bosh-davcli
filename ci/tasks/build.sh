@@ -14,14 +14,6 @@ output_dir="${workspace_dir}/out"
 get_semver() {
   cat "${semver_dir}/number"
 }
-make_version() {
-  local git_rev
-  local timestamp
-  git_rev=$(cd "${release_dir}" && git rev-parse --short HEAD)
-  timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-
-  echo "$(get_semver)-${git_rev}-${timestamp}"
-}
 
 make_binname() {
   GOOS="${GOOS:-$(go env GOOS)}"
@@ -36,9 +28,8 @@ make_binname() {
   fi
 }
 
-
 pushd "${release_dir}" > /dev/null
-  VERSION=$(make_version)
+  VERSION=$(get_semver)
   BINNAME=$(make_binname)
   export VERSION
   export BINNAME
