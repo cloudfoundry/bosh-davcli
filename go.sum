@@ -8,8 +8,8 @@ github.com/bmatcuk/doublestar v1.3.4 h1:gPypJ5xD31uhX6Tf54sDPUOBXTqKH4c9aPY66CyQ
 github.com/bmatcuk/doublestar v1.3.4/go.mod h1:wiQtGV+rzVYxB7WIlirSN++5HPtPlXEo9MEoZQC/PmE=
 github.com/charlievieth/fs v0.0.3 h1:3lZQXTj4PbE81CVPwALSn+JoyCNXkZgORHN6h2XHGlg=
 github.com/charlievieth/fs v0.0.3/go.mod h1:hD4sRzto1Hw8zCua76tNVKZxaeZZr1RiKftjAJQRLLo=
-github.com/cloudfoundry/bosh-utils v0.0.478 h1:A4/9HW8qHuCDZlvMzpEp1d2/JA964NmxO0albp2rDIM=
-github.com/cloudfoundry/bosh-utils v0.0.478/go.mod h1:xMBdcjhsrzrkmG5Wt+gwo8dMHNIOo2Y++PvC21B3GaY=
+github.com/cloudfoundry/bosh-utils v0.0.479 h1:BO0iYxD6T+cHHA49eHZOXpKDoA1Lx6wJ4GF9ZCmoVjM=
+github.com/cloudfoundry/bosh-utils v0.0.479/go.mod h1:WBZukuDLR4lV6Kl1Z4/fATiJCTeEVhA8yPI/mWjxT1Q=
 github.com/cloudfoundry/go-socks5 v0.0.0-20180221174514-54f73bdb8a8e h1:FQdRViaoDphGRfgrotl2QGsX1gbloe57dbGBS5CG6KY=
 github.com/cloudfoundry/go-socks5 v0.0.0-20180221174514-54f73bdb8a8e/go.mod h1:PXmcacyJB/pJjSxEl15IU6rEIKXrhZQRzsr0UTkgNNs=
 github.com/cloudfoundry/socks5-proxy v0.2.120 h1:3H1XkaZziAYqtFHOucKOo4bx3YWgK7NmVF1yD0nM46k=
@@ -42,8 +42,8 @@ github.com/google/go-cmp v0.3.1/go.mod h1:8QqcDgzrUqlUb/G2PQTWiueGozuR1884gddMyw
 github.com/google/go-cmp v0.4.0/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
-github.com/google/pprof v0.0.0-20240625030939-27f56978b8b0 h1:e+8XbKB6IMn8A4OAyZccO4pYfB3s7bt6azNIPE7AnPg=
-github.com/google/pprof v0.0.0-20240625030939-27f56978b8b0/go.mod h1:K1liHPHnj73Fdn/EKuT8nrFqBihUSKXoLYU0BuatOYo=
+github.com/google/pprof v0.0.0-20240711041743-f6c9dda6c6da h1:xRmpO92tb8y+Z85iUOMOicpCfaYcv7o3Cg3wKrIpg8g=
+github.com/google/pprof v0.0.0-20240711041743-f6c9dda6c6da/go.mod h1:K1liHPHnj73Fdn/EKuT8nrFqBihUSKXoLYU0BuatOYo=
 github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpOxQnU=
 github.com/jpillora/backoff v1.0.0 h1:uvFg412JmmHBHw7iwprIxkPMI+sGQ4kzOWsMeHnm2EA=
 github.com/jpillora/backoff v1.0.0/go.mod h1:J/6gKK9jxlEcS3zixgDgUAsiuZ7yrSoa/FX5e0EB2j4=
