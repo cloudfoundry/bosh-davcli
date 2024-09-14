@@ -1,4 +1,4 @@
-# code.cloudfoundry.org/tlsconfig v0.4.0
+# code.cloudfoundry.org/tlsconfig v0.5.0
 ## explicit; go 1.22
 code.cloudfoundry.org/tlsconfig
 # github.com/bmatcuk/doublestar v1.3.4
@@ -7,7 +7,7 @@ github.com/bmatcuk/doublestar
 # github.com/charlievieth/fs v0.0.3
 ## explicit; go 1.18
 github.com/charlievieth/fs
-# github.com/cloudfoundry/bosh-utils v0.0.494
+# github.com/cloudfoundry/bosh-utils v0.0.495
 ## explicit; go 1.22.0
 github.com/cloudfoundry/bosh-utils/crypto
 github.com/cloudfoundry/bosh-utils/errors
@@ -19,7 +19,7 @@ github.com/cloudfoundry/bosh-utils/uuid
 # github.com/cloudfoundry/go-socks5 v0.0.0-20240831012420-2590b55236ee
 ## explicit; go 1.21.0
 github.com/cloudfoundry/go-socks5
-# github.com/cloudfoundry/socks5-proxy v0.2.123
+# github.com/cloudfoundry/socks5-proxy v0.2.124
 ## explicit; go 1.22.0
 github.com/cloudfoundry/socks5-proxy
 # github.com/fsnotify/fsnotify v1.7.0
@@ -143,8 +143,8 @@ golang.org/x/text/internal/utf8internal
 golang.org/x/text/language
 golang.org/x/text/runes
 golang.org/x/text/transform
-# golang.org/x/tools v0.24.0
-## explicit; go 1.19
+# golang.org/x/tools v0.25.0
+## explicit; go 1.22.0
 golang.org/x/tools/go/ast/inspector
 # google.golang.org/protobuf v1.34.1
 ## explicit; go 1.17
