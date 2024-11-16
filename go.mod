@@ -3,13 +3,13 @@ module github.com/cloudfoundry/bosh-davcli
 go 1.22.0
 
 require (
-	github.com/cloudfoundry/bosh-utils v0.0.500
+	github.com/cloudfoundry/bosh-utils v0.0.501
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.34.2
 )
 
 require (
-	code.cloudfoundry.org/tlsconfig v0.8.0 // indirect
+	code.cloudfoundry.org/tlsconfig v0.9.0 // indirect
 	github.com/bmatcuk/doublestar v1.3.4 // indirect
 	github.com/charlievieth/fs v0.0.3 // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20240831012420-2590b55236ee // indirect
