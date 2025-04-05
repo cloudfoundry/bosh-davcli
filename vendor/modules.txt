@@ -1,4 +1,4 @@
-# code.cloudfoundry.org/tlsconfig v0.22.0
+# code.cloudfoundry.org/tlsconfig v0.23.0
 ## explicit; go 1.23.0
 code.cloudfoundry.org/tlsconfig
 # github.com/bmatcuk/doublestar v1.3.4
@@ -22,7 +22,7 @@ github.com/cloudfoundry/go-socks5
 # github.com/cloudfoundry/socks5-proxy v0.2.147
 ## explicit; go 1.23.0
 github.com/cloudfoundry/socks5-proxy
-# github.com/fsnotify/fsnotify v1.8.0
+# github.com/fsnotify/fsnotify v1.9.0
 ## explicit; go 1.17
 github.com/fsnotify/fsnotify
 github.com/fsnotify/fsnotify/internal
