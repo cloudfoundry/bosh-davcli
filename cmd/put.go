@@ -18,7 +18,7 @@ func newPutCmd(client davclient.Client) (cmd PutCmd) {
 
 func (cmd PutCmd) Run(args []string) error {
 	if len(args) != 2 {
-		return errors.New("Incorrect usage, put needs local file and remote blob destination")
+		return errors.New("Incorrect usage, put needs local file and remote blob destination") //nolint:staticcheck
 	}
 
 	file, err := os.OpenFile(args[0], os.O_RDWR, os.ModeExclusive)

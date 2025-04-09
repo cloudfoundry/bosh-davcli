@@ -23,7 +23,7 @@ type runner struct {
 
 func (r runner) Run(cmdArgs []string) (err error) {
 	if len(cmdArgs) == 0 {
-		err = errors.New("Missing command name")
+		err = errors.New("Missing command name") //nolint:staticcheck
 		return
 	}
 

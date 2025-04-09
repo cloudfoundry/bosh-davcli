@@ -19,7 +19,7 @@ func newGetCmd(client davclient.Client) (cmd GetCmd) {
 
 func (cmd GetCmd) Run(args []string) (err error) {
 	if len(args) != 2 {
-		err = errors.New("Incorrect usage, get needs remote blob path and local file destination")
+		err = errors.New("Incorrect usage, get needs remote blob path and local file destination") //nolint:staticcheck
 		return
 	}
 
@@ -27,7 +27,7 @@ func (cmd GetCmd) Run(args []string) (err error) {
 	if err != nil {
 		return
 	}
-	defer readCloser.Close()
+	defer readCloser.Close() //nolint:errcheck
 
 	targetFile, err := os.Create(args[1])
 	if err != nil {

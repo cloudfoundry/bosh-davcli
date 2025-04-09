@@ -9,10 +9,11 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/ghttp"
 
-	. "github.com/cloudfoundry/bosh-davcli/client"
-	davconf "github.com/cloudfoundry/bosh-davcli/config"
 	"github.com/cloudfoundry/bosh-utils/httpclient"
 	boshlog "github.com/cloudfoundry/bosh-utils/logger"
+
+	. "github.com/cloudfoundry/bosh-davcli/client"
+	davconf "github.com/cloudfoundry/bosh-davcli/config"
 )
 
 var _ = Describe("Client", func() {
@@ -36,7 +37,7 @@ var _ = Describe("Client", func() {
 		conn, _, err := w.(http.Hijacker).Hijack()
 		Expect(err).NotTo(HaveOccurred())
 
-		conn.Close()
+		conn.Close() //nolint:errcheck
 	})
 
 	Describe("Exists", func() {
@@ -134,7 +135,7 @@ var _ = Describe("Client", func() {
 			responseBody, err := client.Get("/")
 			Expect(err).NotTo(HaveOccurred())
 			buf := make([]byte, 1024)
-			n, _ := responseBody.Read(buf)
+			n, _ := responseBody.Read(buf) //nolint:errcheck
 			Expect(string(buf[0:n])).To(Equal("response"))
 		})
 

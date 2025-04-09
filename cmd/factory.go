@@ -1,15 +1,15 @@
 package cmd
 
 import (
+	"crypto/x509"
 	"fmt"
 
-	"crypto/x509"
-
-	davclient "github.com/cloudfoundry/bosh-davcli/client"
-	davconf "github.com/cloudfoundry/bosh-davcli/config"
 	boshcrypto "github.com/cloudfoundry/bosh-utils/crypto"
 	boshhttpclient "github.com/cloudfoundry/bosh-utils/httpclient"
 	boshlog "github.com/cloudfoundry/bosh-utils/logger"
+
+	davclient "github.com/cloudfoundry/bosh-davcli/client"
+	davconf "github.com/cloudfoundry/bosh-davcli/config"
 )
 
 type Factory interface {
@@ -33,7 +33,7 @@ type factory struct {
 func (f *factory) Create(name string) (cmd Cmd, err error) {
 	cmd, found := f.cmds[name]
 	if !found {
-		err = fmt.Errorf("Could not find command with name %s", name)
+		err = fmt.Errorf("Could not find command with name %s", name) //nolint:staticcheck
 	}
 	return
 }
