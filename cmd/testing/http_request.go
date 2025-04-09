@@ -18,26 +18,26 @@ func NewHTTPRequest(req *http.Request) (testReq HTTPRequest) {
 func (req HTTPRequest) ExtractBasicAuth() (username, password string, err error) {
 	authHeader := req.Header["Authorization"]
 	if len(authHeader) != 1 {
-		err = errors.New("Missing basic auth header")
+		err = errors.New("Missing basic auth header") //nolint:staticcheck
 		return
 	}
 
 	encodedAuth := authHeader[0]
 	encodedAuthParts := strings.Split(encodedAuth, " ")
 	if len(encodedAuthParts) != 2 {
-		err = errors.New("Invalid basic auth header format")
+		err = errors.New("Invalid basic auth header format") //nolint:staticcheck
 		return
 	}
 
 	clearAuth, err := base64.StdEncoding.DecodeString(encodedAuthParts[1])
 	if len(encodedAuthParts) != 2 {
-		err = errors.New("Invalid basic auth header encoding")
+		err = errors.New("Invalid basic auth header encoding") //nolint:staticcheck
 		return
 	}
 
 	clearAuthParts := strings.Split(string(clearAuth), ":")
 	if len(clearAuthParts) != 2 {
-		err = errors.New("Invalid basic auth header encoded username and pwd")
+		err = errors.New("Invalid basic auth header encoded username and pwd") //nolint:staticcheck
 		return
 	}
 

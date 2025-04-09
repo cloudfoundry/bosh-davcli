@@ -41,7 +41,7 @@ func (app App) Run(args []string) (err error) {
 	}
 
 	if configFilePath == "" {
-		err = errors.New("Config file arg `-c` is missing")
+		err = errors.New("Config file arg `-c` is missing") //nolint:staticcheck
 		return
 	}
 
@@ -63,7 +63,7 @@ func (app App) Run(args []string) (err error) {
 
 	err = app.runner.SetConfig(config)
 	if err != nil {
-		err = fmt.Errorf("Invalid CA Certificate: %s", err.Error())
+		err = fmt.Errorf("Invalid CA Certificate: %s", err.Error()) //nolint:staticcheck
 		return
 	}
 

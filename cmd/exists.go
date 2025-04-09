@@ -17,7 +17,7 @@ func newExistsCmd(client davclient.Client) (cmd ExistsCmd) {
 
 func (cmd ExistsCmd) Run(args []string) (err error) {
 	if len(args) != 1 {
-		err = errors.New("Incorrect usage, exists needs remote blob path")
+		err = errors.New("Incorrect usage, exists needs remote blob path") //nolint:staticcheck
 		return
 	}
 	err = cmd.client.Exists(args[0])

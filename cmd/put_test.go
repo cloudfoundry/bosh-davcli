@@ -10,10 +10,11 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 
+	boshlog "github.com/cloudfoundry/bosh-utils/logger"
+
 	. "github.com/cloudfoundry/bosh-davcli/cmd"
 	testcmd "github.com/cloudfoundry/bosh-davcli/cmd/testing"
 	davconf "github.com/cloudfoundry/bosh-davcli/config"
-	boshlog "github.com/cloudfoundry/bosh-utils/logger"
 )
 
 func runPut(config davconf.Config, args []string) error {
@@ -69,7 +70,7 @@ var _ = Describe("PutCmd", func() {
 				Expect(password).To(Equal("some pwd"))
 
 				expectedBytes := fileBytes(sourceFilePath)
-				actualBytes, _ := io.ReadAll(r.Body)
+				actualBytes, _ := io.ReadAll(r.Body) //nolint:errcheck
 				Expect(expectedBytes).To(Equal(actualBytes))
 
 				w.WriteHeader(201)

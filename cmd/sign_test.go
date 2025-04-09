@@ -10,8 +10,9 @@ import (
 
 	. "github.com/cloudfoundry/bosh-davcli/cmd"
 
-	davconf "github.com/cloudfoundry/bosh-davcli/config"
 	boshlog "github.com/cloudfoundry/bosh-utils/logger"
+
+	davconf "github.com/cloudfoundry/bosh-davcli/config"
 )
 
 func runSign(config davconf.Config, args []string) error {
@@ -32,8 +33,8 @@ var _ = Describe("SignCmd", func() {
 	)
 
 	It("with valid args", func() {
-		old := os.Stdout // keep backup of the real stdout
-		r, w, _ := os.Pipe()
+		old := os.Stdout     // keep backup of the real stdout
+		r, w, _ := os.Pipe() //nolint:errcheck
 		os.Stdout = w
 
 		err := runSign(config, []string{objectID, "get", "15m"})
@@ -47,7 +48,7 @@ var _ = Describe("SignCmd", func() {
 		}()
 
 		// back to normal state
-		w.Close()
+		w.Close()       //nolint:errcheck
 		os.Stdout = old // restoring the real stdout
 		out := <-outC
 

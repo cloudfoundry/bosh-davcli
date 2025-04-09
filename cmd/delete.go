@@ -17,7 +17,7 @@ func newDeleteCmd(client davclient.Client) (cmd DeleteCmd) {
 
 func (cmd DeleteCmd) Run(args []string) (err error) {
 	if len(args) != 1 {
-		err = errors.New("Incorrect usage, delete needs remote blob path")
+		err = errors.New("Incorrect usage, delete needs remote blob path") //nolint:staticcheck
 		return
 	}
 	err = cmd.client.Delete(args[0])
