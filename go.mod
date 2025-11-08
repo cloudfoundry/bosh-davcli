@@ -3,7 +3,7 @@ module github.com/cloudfoundry/bosh-davcli
 go 1.23.0
 
 require (
-	github.com/cloudfoundry/bosh-utils v0.0.560
+	github.com/cloudfoundry/bosh-utils v0.0.563
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.38.2
 )
