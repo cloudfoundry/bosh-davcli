@@ -1,4 +1,4 @@
-# code.cloudfoundry.org/tlsconfig v0.39.0
+# code.cloudfoundry.org/tlsconfig v0.40.0
 ## explicit; go 1.24.0
 code.cloudfoundry.org/tlsconfig
 # github.com/bmatcuk/doublestar v1.3.4
@@ -7,7 +7,7 @@ github.com/bmatcuk/doublestar
 # github.com/charlievieth/fs v0.0.3
 ## explicit; go 1.18
 github.com/charlievieth/fs
-# github.com/cloudfoundry/bosh-utils v0.0.568
+# github.com/cloudfoundry/bosh-utils v0.0.569
 ## explicit; go 1.23.0
 github.com/cloudfoundry/bosh-utils/crypto
 github.com/cloudfoundry/bosh-utils/errors
@@ -103,7 +103,7 @@ github.com/pivotal-cf/paraphernalia/secure/tlsconfig
 # go.yaml.in/yaml/v3 v3.0.4
 ## explicit; go 1.16
 go.yaml.in/yaml/v3
-# golang.org/x/crypto v0.44.0
+# golang.org/x/crypto v0.45.0
 ## explicit; go 1.24.0
 golang.org/x/crypto/blowfish
 golang.org/x/crypto/chacha20
