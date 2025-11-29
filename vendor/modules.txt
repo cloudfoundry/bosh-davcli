@@ -1,4 +1,4 @@
-# code.cloudfoundry.org/tlsconfig v0.40.0
+# code.cloudfoundry.org/tlsconfig v0.41.0
 ## explicit; go 1.24.0
 code.cloudfoundry.org/tlsconfig
 # github.com/bmatcuk/doublestar v1.3.4
@@ -7,7 +7,7 @@ github.com/bmatcuk/doublestar
 # github.com/charlievieth/fs v0.0.3
 ## explicit; go 1.18
 github.com/charlievieth/fs
-# github.com/cloudfoundry/bosh-utils v0.0.570
+# github.com/cloudfoundry/bosh-utils v0.0.572
 ## explicit; go 1.24.0
 github.com/cloudfoundry/bosh-utils/crypto
 github.com/cloudfoundry/bosh-utils/errors
