@@ -5,15 +5,15 @@ go 1.24.0
 require (
 	github.com/cloudfoundry/bosh-utils v0.0.582
 	github.com/onsi/ginkgo v1.16.5
-	github.com/onsi/gomega v1.38.2
+	github.com/onsi/gomega v1.39.0
 )
 
 require (
-	code.cloudfoundry.org/tlsconfig v0.43.0 // indirect
+	code.cloudfoundry.org/tlsconfig v0.44.0 // indirect
 	github.com/bmatcuk/doublestar v1.3.4 // indirect
 	github.com/charlievieth/fs v0.0.3 // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 // indirect
-	github.com/cloudfoundry/socks5-proxy v0.2.165 // indirect
+	github.com/cloudfoundry/socks5-proxy v0.2.166 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
