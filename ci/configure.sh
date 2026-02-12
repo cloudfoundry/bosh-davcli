@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-fly -t bosh set-pipeline -p bosh-dav-cli -c "$(dirname "${0}")/pipeline.yml"
+fly -t "${CONCOURSE_TARGET:-storage-cli}" set-pipeline -p bosh-dav-cli -c "$(dirname "${0}")/pipeline.yml"
