@@ -148,6 +148,6 @@ resources:
   - name: s3cli-docker-image
     type: docker-image
     source:
-      repository: bosh/s3cli
-      username: ((dockerhub_username))
-      password: ((dockerhub_password))
+      repository: ghcr.io/cloudfoundry/bosh/s3cli
+      username: ((github_read_write_packages.username))
+      password: ((github_read_write_packages.password))
