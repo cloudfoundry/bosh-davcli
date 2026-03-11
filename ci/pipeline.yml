@@ -3,10 +3,10 @@ jobs:
   - name: test
     serial: true
     plan:
-      - {trigger: true, get: davcli-src}
+      - get: davcli-src
+        trigger: true
       - get: s3cli-docker-image
         trigger: true
-
       - task: test
         image: s3cli-docker-image
         file: davcli-src/ci/tasks/run-test.yml
