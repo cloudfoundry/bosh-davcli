@@ -25,7 +25,6 @@ jobs:
       - get: version-semver
         params:
           bump: patch
-
       - in_parallel:
         - task: build-linux
           image: s3cli-docker-image
@@ -48,7 +47,6 @@ jobs:
           params:
             GOOS: windows
             GOARCH: amd64
-
       - in_parallel:
         - put: release-bucket-linux
           params: {file: out-linux/davcli-*-linux-amd64}
@@ -56,7 +54,6 @@ jobs:
           params: {file: out-linux-ppc64le/davcli-*-linux-ppc64le}
         - put: release-bucket-windows
           params: {file: out-windows/davcli-*-windows-amd64.exe}
-
       - put: version-semver
         params:
           file: version-semver/number
@@ -67,6 +64,7 @@ jobs:
     plan:
     - in_parallel:
       - get: davcli-src
+      - get: s3cli-docker-image
       - get: golang-release
       - get: weekly
         trigger: true
@@ -77,6 +75,7 @@ jobs:
       output_mapping:
         output_repo: bumped-davcli-src
     - task: test
+      image: s3cli-docker-image
       file: davcli-src/ci/tasks/run-test.yml
       input_mapping:
         gosigar: bumped-davcli-src
