@@ -3,7 +3,7 @@ module github.com/cloudfoundry/bosh-davcli
 go 1.25.0
 
 require (
-	github.com/cloudfoundry/bosh-utils v0.0.609
+	github.com/cloudfoundry/bosh-utils v0.0.611
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/gomega v1.40.0
 )
@@ -20,7 +20,6 @@ require (
 	github.com/kr/text v0.2.0 // indirect
 	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d // indirect
 	github.com/nxadm/tail v1.4.11 // indirect
-	github.com/pivotal-cf/paraphernalia v0.0.0-20180203224945-a64ae2051c20 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/crypto v0.51.0 // indirect
 	golang.org/x/net v0.54.0 // indirect
