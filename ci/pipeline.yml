@@ -78,7 +78,7 @@ jobs:
       image: s3cli-image
       file: davcli-src/ci/tasks/run-test.yml
       input_mapping:
-        gosigar: bumped-davcli-src
+        davcli-src: bumped-davcli-src
     - put: davcli-src
       params:
         repository: bumped-davcli-src
