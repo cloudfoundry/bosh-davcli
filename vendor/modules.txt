@@ -4,7 +4,7 @@ code.cloudfoundry.org/tlsconfig
 # github.com/bmatcuk/doublestar v1.3.4
 ## explicit; go 1.12
 github.com/bmatcuk/doublestar
-# github.com/cloudfoundry/bosh-utils v0.0.619
+# github.com/cloudfoundry/bosh-utils v0.0.622
 ## explicit; go 1.25.0
 github.com/cloudfoundry/bosh-utils/crypto
 github.com/cloudfoundry/bosh-utils/errors
@@ -16,7 +16,7 @@ github.com/cloudfoundry/bosh-utils/uuid
 # github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851
 ## explicit; go 1.21.0
 github.com/cloudfoundry/go-socks5
-# github.com/cloudfoundry/socks5-proxy v0.2.178
+# github.com/cloudfoundry/socks5-proxy v0.2.179
 ## explicit; go 1.25.0
 github.com/cloudfoundry/socks5-proxy
 # github.com/fsnotify/fsnotify v1.10.1
