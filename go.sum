@@ -12,8 +12,8 @@ github.com/cloudfoundry/bosh-utils v0.0.669 h1:u2Q4SwI/ABDZQi+v2wQLrufpC8rWPDEq7
 github.com/cloudfoundry/bosh-utils v0.0.669/go.mod h1:wWIw6xcVWTs3xSslor7u7hRK02+9IF+w1VW5TfAwW7U=
 github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 h1:oy59UYcspoP44ggE8DM3kjxl1+sTFd802bbZlBBhBMk=
 github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851/go.mod h1:72EEm1oq5oXqGfu9XGtaRPWEcAFYd/P10cMNln0QhA8=
-github.com/cloudfoundry/socks5-proxy v0.2.193 h1:w08lMguGxDNvoQs3LNmvvO1z+lBCjdLCt2bSSfjVgPk=
-github.com/cloudfoundry/socks5-proxy v0.2.193/go.mod h1:p6wUOBzHBqCOBqvnsDMvneTXZz4cG4DR5Tv7LKn3uJo=
+github.com/cloudfoundry/socks5-proxy v0.2.194 h1:+PvZku8ynIyy03Vr0DjtvTo75h273bYYR+DBK2DHZrg=
+github.com/cloudfoundry/socks5-proxy v0.2.194/go.mod h1:tx7gCbNgNNfysi/6sZB82B+k4OMt/LJR3WFPsWmkUf4=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=

@@ -12,7 +12,7 @@ require (
 	code.cloudfoundry.org/tlsconfig v0.69.0 // indirect
 	github.com/bmatcuk/doublestar v1.3.4 // indirect
 	github.com/cloudfoundry/go-socks5 v0.0.0-20250423223041-4ad5fea42851 // indirect
-	github.com/cloudfoundry/socks5-proxy v0.2.193 // indirect
+	github.com/cloudfoundry/socks5-proxy v0.2.194 // indirect
 	github.com/fsnotify/fsnotify v1.10.1 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
